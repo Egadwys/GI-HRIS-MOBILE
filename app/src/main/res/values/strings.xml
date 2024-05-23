@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">GI-EMPLOYEE</string>
+    <string name="greeting_header">HELLO, EGA!</string>
+    <string name="staff_mis">STAFF MIS</string>
+    <string name="search_nik">Search NIK</string>
+    <string name="dev_ops">DEV OPS</string>
+    <string name="name">Name</string>
+    <string name="position">Position</string>
+    <string name="id">Id</string>
+    <string name="getting_data_from_server">GETTING DATA FROM SERVER...</string>
+    <string name="time_in">TIME IN</string>
+    <string name="time_out">TIME OUT</string>
+    <string name="posisi">POSISI</string>
+    <string name="strip">-</string>
+    <string name="dept">DEPT</string>
+    <string name="nik">NIK</string>
+</resources>

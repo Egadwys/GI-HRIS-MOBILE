@@ -1,0 +1,17 @@
+<!-- res/drawable/progress_bar_black.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background"
+        android:drawable="@android:color/transparent"/>
+    <item android:id="@android:id/secondaryProgress"
+        android:drawable="@android:color/transparent"/>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="ring"
+                android:innerRadiusRatio="3"
+                android:thicknessRatio="8"
+                android:useLevel="false">
+                <solid android:color="@color/blueMIS"/>
+            </shape>
+        </clip>
+    </item>
+</layer-list>
