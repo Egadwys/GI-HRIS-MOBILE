@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
     private lateinit var progressBar: ProgressBar
     private lateinit var loadtext: TextView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var title: TextView
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
         loadtext = findViewById(R.id.loadtext)
         mRecyclerView = findViewById(R.id.recyclerView)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        title = findViewById(R.id.main_title_header)
+
+        title.text = intent.getStringExtra("name")
+
+
 
         swipeRefreshLayout.setOnRefreshListener {
             loaddata()

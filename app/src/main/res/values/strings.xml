@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GI-EMPLOYEE</string>
+    <string name="app_name">HRIS MOBILE</string>
     <string name="greeting_header">HELLO, EGA!</string>
     <string name="staff_mis">STAFF MIS</string>
     <string name="search_nik">Search NIK</string>
@@ -14,4 +14,17 @@
     <string name="strip">-</string>
     <string name="dept">DEPT</string>
     <string name="nik">NIK</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="prompt_email">username</string>
+    <string name="prompt_password">password</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="login">login</string>
+    <string name="human_resource_information_sytem">HUMAN RESOURCE\nINFORMATION SYTEM</string>
 </resources>
