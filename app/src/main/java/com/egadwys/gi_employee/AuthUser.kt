@@ -1,16 +1,20 @@
 package com.egadwys.gi_employee
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.text.Editable
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -21,11 +25,27 @@ class AuthUser : AppCompatActivity() {
     private lateinit var button: MaterialButton
     private lateinit var username: TextInputEditText
     private lateinit var password: TextInputEditText
+    private lateinit var glide: ImageView
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_auth_user)
 
+        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
+        val cekuser = sharedPreferences.getString("user", "NoUser")
+        val ceknama = sharedPreferences.getString("nama", "NoNama")
+        if ( cekuser == "NoUser") {
+            Toast.makeText(this, "Silahkan login terlebih dahulu",Toast.LENGTH_SHORT).show()
+        } else {
+            val intent = Intent(this@AuthUser, MainActivity::class.java).apply {
+                putExtra("username", cekuser)
+                putExtra("name", ceknama)
+            }
+            startActivity(intent)
+        }
+//        glide = findViewById(R.id.animationView)
+//        Glide.with(this).load(R.drawable.anim_login).into(glide)
         button = findViewById(R.id.btn_login)
         username = findViewById(R.id.username)
         password = findViewById(R.id.password)
@@ -53,14 +73,14 @@ class AuthUser : AppCompatActivity() {
     }
 
     private fun getdata(user: String, pass: String) {
-//        Toast.makeText(this@AuthUser, user, Toast.LENGTH_LONG).show()
-//        Toast.makeText(this@AuthUser, pass, Toast.LENGTH_LONG).show()
         LoginRetrofitClient.instance.cekuser(user,pass).enqueue(object : Callback<List<LoginDataClass>> {
             override fun onResponse(call: Call<List<LoginDataClass>>, response: Response<List<LoginDataClass>>) {
                 if (response.isSuccessful) {
                     response.body()?.let { loginDataList ->
                         if (loginDataList.isNotEmpty()) {
                             val loginData = loginDataList[0]
+                            sharedPreferences.edit().putString("user", loginData.username).apply()
+                            sharedPreferences.edit().putString("nama", loginData.name).apply()
                             val intent = Intent(this@AuthUser, MainActivity::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)

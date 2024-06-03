@@ -27,4 +27,6 @@
     <string name="password">password</string>
     <string name="login">login</string>
     <string name="human_resource_information_sytem">HUMAN RESOURCE\nINFORMATION SYTEM</string>
+    <string name="hari">HARI</string>
+    <string name="tanggal">TANGGAL</string>
 </resources>

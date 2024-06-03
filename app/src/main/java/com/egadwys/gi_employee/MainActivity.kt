@@ -1,69 +1,96 @@
 package com.egadwys.gi_employee
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var loading: LinearLayout
-    private lateinit var progressBar: ProgressBar
     private lateinit var loadtext: TextView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var title: TextView
+    private lateinit var sharedPreferences: SharedPreferences
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
         loading = findViewById(R.id.loading)
-        progressBar = findViewById(R.id.progressBar)
         loadtext = findViewById(R.id.loadtext)
         mRecyclerView = findViewById(R.id.recyclerView)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         title = findViewById(R.id.main_title_header)
 
-        title.text = intent.getStringExtra("name")
-
-
-
+        title.text = sharedPreferences.getString("nama", "NoNama")
+        val nik = sharedPreferences.getString("user", "NoUser")
+        Log.d("Filter", "NIK: ${nik}")
         swipeRefreshLayout.setOnRefreshListener {
-            loaddata()
+            loaddata(nik.toString())
         }
 
-        loaddata()
+        loaddata(nik.toString())
 
     }
 
-    private fun loaddata() {
-        progressBar.visibility = View.GONE
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("DUMMY")
+        builder.setPositiveButton("Logout") { dialog, which ->
+            sharedPreferences.edit().putString("user", "NoUser").apply()
+            sharedPreferences.edit().putString("nama", "NoNama").apply()
+            Toast.makeText(this, "You're logging off", Toast.LENGTH_SHORT).show()
+            super.onBackPressed()
+        }
+        builder.setNegativeButton("Exit app") { dialog, which ->
+            finishAffinity()
+            super.onBackPressed()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun loaddata(nik: String) {
         loading.visibility = View.VISIBLE
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
 
-        RetrofitClient.instance.getData().enqueue(object : Callback<List<YourDataClass>> {
+        RetrofitClient.instance.getData(nik).enqueue(object : Callback<List<YourDataClass>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<YourDataClass>>, response: Response<List<YourDataClass>>) {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null && data.isNotEmpty()) {
                         runOnUiThread {
-                            mRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+                            mRecyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
                             val adapter = YourDataAdapter(data, this@MainActivity) // Pass 'this' as itemClickListener
                             mRecyclerView.adapter = adapter
 
@@ -86,7 +113,6 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
                     }
                     swipeRefreshLayout.isRefreshing = false
                 } else {
-                    progressBar.visibility = View.GONE
                     mRecyclerView.visibility = View.GONE
                     loading.visibility = View.VISIBLE
                     loadtext.text = "Failed to get data: ${response.message()}"
@@ -106,23 +132,32 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
     }
 
     override fun onItemClick(data: YourDataClass) {
-        val dialogFragment = DialogFragment()
-        val bundle = Bundle()
-        bundle.putString("name", data.name)
-        bundle.putString("position", data.position)
-        bundle.putString("nik", data.NIK.toString())
-        bundle.putString("dept", data.dept)
-        bundle.putString("div", data.division)
-        bundle.putString("wg", data.Workgroup)
-        bundle.putString("birth", data.dateBirth)
-        bundle.putString("kec", data.kecamatan)
-        bundle.putString("kel", data.kelurahan)
-        bundle.putString("kota", data.kota)
-        bundle.putString("prov", data.provinsi)
-        bundle.putString("negara", data.negara)
-        bundle.putString("tin", data.masuk)
-        bundle.putString("tout", data.pulang)
-        dialogFragment.arguments = bundle
-        dialogFragment.show(supportFragmentManager, "CustomDialogFragmentTag")
+        val vibrator = ContextCompat.getSystemService(this, Vibrator::class.java) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Vibrate for 100 milliseconds
+            val vibrationEffect = VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            // Deprecated in API 26
+            vibrator.vibrate(100)
+        }
+//        val dialogFragment = DialogFragment()
+//        val bundle = Bundle()
+//        bundle.putString("name", data.name)
+//        bundle.putString("position", data.position)
+//        bundle.putString("nik", data.NIK.toString())
+//        bundle.putString("dept", data.dept)
+//        bundle.putString("div", data.division)
+//        bundle.putString("wg", data.Workgroup)
+//        bundle.putString("birth", data.dateBirth)
+//        bundle.putString("kec", data.kecamatan)
+//        bundle.putString("kel", data.kelurahan)
+//        bundle.putString("kota", data.kota)
+//        bundle.putString("prov", data.provinsi)
+//        bundle.putString("negara", data.negara)
+//        bundle.putString("tin", data.masuk)
+//        bundle.putString("tout", data.pulang)
+//        dialogFragment.arguments = bundle
+//        dialogFragment.show(supportFragmentManager, "CustomDialogFragmentTag")
     }
 }

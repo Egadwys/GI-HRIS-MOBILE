@@ -27,6 +27,7 @@
         <activity
             android:name=".AuthUser"
             android:exported="true"
+            android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi">
             <intent-filter>

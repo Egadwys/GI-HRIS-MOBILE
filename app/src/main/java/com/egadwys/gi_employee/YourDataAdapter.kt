@@ -27,10 +27,8 @@ class YourDataAdapter(
         position: Int
     ) {
         val item = filteredDataList[position]
-        holder.name.text = item.name
-        holder.NIK.text = item.NIK.toString()
-        holder.position.text = item.position
-        holder.dept.text = item.dept
+        holder.hari.text = item.hari
+        holder.tanggal.text = item.tanggal
         holder.tin.text = item.masuk
         holder.tout.text = item.pulang
 
@@ -63,7 +61,7 @@ class YourDataAdapter(
                     dataList
                 } else {
                     dataList.filter {
-                        it.name.contains(charString, true)
+                        it.tanggal.contains(charString, true)
                     }
                 }
 //                Log.d("Filter", "Filtered data size: ${filteredDataList.size}")
