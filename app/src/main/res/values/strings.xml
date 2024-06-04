@@ -29,4 +29,5 @@
     <string name="human_resource_information_sytem">HUMAN RESOURCE\nINFORMATION SYTEM</string>
     <string name="hari">HARI</string>
     <string name="tanggal">TANGGAL</string>
+    <string name="todo">TODO</string>
 </resources>

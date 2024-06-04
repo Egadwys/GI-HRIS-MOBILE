@@ -1,5 +1,6 @@
 package com.egadwys.gi_employee
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -25,6 +27,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.time.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,12 +41,19 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var title: TextView
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var fabMain: FloatingActionButton
+    private lateinit var fabOption1: FloatingActionButton
+    private lateinit var fabOption2: FloatingActionButton
+    private var isFabOpen = false
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        fabMain = findViewById(R.id.fab_main)
+        fabOption1 = findViewById(R.id.fab_option1)
+        fabOption2 = findViewById(R.id.fab_option2)
         sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
         loading = findViewById(R.id.loading)
         loadtext = findViewById(R.id.loadtext)
@@ -56,9 +67,54 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
         swipeRefreshLayout.setOnRefreshListener {
             loaddata(nik.toString())
         }
-
         loaddata(nik.toString())
 
+        fabMain.setOnClickListener {
+            if (isFabOpen) {
+                closeFABMenu()
+            } else {
+                showFABMenu()
+            }
+        }
+
+        fabOption1.setOnClickListener {
+            sharedPreferences.edit().putString("user", "NoUser").apply()
+            sharedPreferences.edit().putString("nama", "NoNama").apply()
+            finish()
+            Toast.makeText(this, "You're logging off", Toast.LENGTH_SHORT).show()
+        }
+
+        fabOption2.setOnClickListener {
+            finishAffinity()
+        }
+
+    }
+
+    private fun showFABMenu() {
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        val fadeInAnimation_delay = AnimationUtils.loadAnimation(this, R.anim.fade_in_delay)
+        isFabOpen = true
+        fabOption1.visibility = View.VISIBLE
+        fabOption2.visibility = View.VISIBLE
+        fabOption1.startAnimation(fadeInAnimation)
+        fabOption2.startAnimation(fadeInAnimation_delay)
+        rotateFab(fabMain, 0f, 1350f) // Change icon to close
+    }
+
+    private fun closeFABMenu() {
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+        isFabOpen = false
+        fabOption1.startAnimation(fadeInAnimation)
+        fabOption2.startAnimation(fadeInAnimation)
+        fabOption1.visibility = View.GONE
+        fabOption2.visibility = View.GONE
+        rotateFab(fabMain, 1350f, 0f) // Change icon back to add
+    }
+
+    private fun rotateFab(fab: FloatingActionButton, from: Float, to: Float) {
+        val animator = ObjectAnimator.ofFloat(fab, "rotation", from, to)
+        animator.duration = 300
+        animator.start()
     }
 
     override fun onBackPressed() {

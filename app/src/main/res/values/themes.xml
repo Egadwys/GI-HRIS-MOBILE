@@ -10,7 +10,8 @@
         <item name="colorSecondaryVariant">@color/blueMISDARK</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="TransparentDialogTheme" parent="Theme.AppCompat.Light.Dialog">
@@ -25,5 +26,10 @@
         <item name="android:progressTint">@color/black2</item>
         <item name="android:indeterminateTint">@color/black2</item>
         <item name="cardBackgroundColor">@color/white</item>
+        <item name="backgroundTint">@color/black2</item>
+        <item name="tint">@color/white</item>
+    </style>
+    <style name="logo_hris">
+        <item name="android:src">@drawable/hris</item>
     </style>
 </resources>
