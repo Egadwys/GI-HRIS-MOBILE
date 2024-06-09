@@ -30,4 +30,9 @@
     <string name="hari">HARI</string>
     <string name="tanggal">TANGGAL</string>
     <string name="todo">TODO</string>
+    <string name="logo_hris">LOGO HRIS</string>
+    <string name="fab_logout">FAB LOGOUT</string>
+    <string name="fab_exit_app">FAB EXIT APP</string>
+    <string name="fab_main">FAB MAIN</string>
+    <string name="autentikasi">autentikasi...</string>
 </resources>

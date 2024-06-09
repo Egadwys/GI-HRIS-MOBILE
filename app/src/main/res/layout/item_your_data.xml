@@ -3,9 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="4dp"
+    app:cardElevation="0dp"
     app:cardCornerRadius="15dp"
-    style="@style/customstyle"
+    style="@style/customcard"
     android:orientation="vertical"
     android:layout_margin="8dp">
 
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#009688"
+                app:cardBackgroundColor="#B3009688"
                 app:cardCornerRadius="10dp">
 
                 <TextView
@@ -65,7 +65,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#F44336"
+                app:cardBackgroundColor="#B3F44336"
                 app:cardCornerRadius="10dp">
 
                 <TextView

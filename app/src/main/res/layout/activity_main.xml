@@ -9,36 +9,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        style="@style/customstyle">
+        android:orientation="vertical" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/header"
-            style="@style/customstyle"
             android:gravity="center_vertical"
-            android:padding="20dp"
-            android:orientation="horizontal">
-            
+            android:paddingVertical="20dp"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            style="@style/customstyleheader"
+            tools:ignore="UseCompoundDrawables">
+
             <ImageView
-                android:id="@+id/logo_hris"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                style="@style/logo_hris"/>
+                android:layout_marginHorizontal="20dp"
+                style="@style/logo_hris"
+                android:contentDescription="@string/logo_hris" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
                 android:id="@+id/main_title_header"
-                android:layout_below="@id/logo_hris"
                 android:gravity="start"
                 android:textSize="18sp"
                 android:maxLines="1"
-                style="@style/customstyle"
                 android:textStyle="bold|italic"
                 android:text="@string/app_name" />
-        </RelativeLayout>
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search by Date..." />
+
+        </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
@@ -50,14 +60,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:id="@+id/recylelayout">
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/customstyle"
-                    app:iconifiedByDefault="false"
-                    app:queryHint="Search by Date..." />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -104,12 +106,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:contentDescription="@string/todo"
+            android:contentDescription="@string/fab_main"
             app:elevation="0dp"
             app:rippleColor="@color/white"
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_add"
-            style="@style/customstyle"/>
+            style="@style/customfab"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_option1"
@@ -117,24 +119,26 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginVertical="10dp"
+            android:contentDescription="@string/fab_logout"
             app:elevation="0dp"
             app:rippleColor="@color/white"
             app:srcCompat="@drawable/ic_sign_out"
             android:layout_above="@id/fab_main"
             android:visibility="gone"
-            style="@style/customstyle"/>
+            style="@style/customfab"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_option2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:contentDescription="@string/fab_exit_app"
             app:elevation="0dp"
             app:rippleColor="@color/white"
             android:layout_above="@id/fab_option1"
             app:srcCompat="@drawable/ic_exit"
             android:visibility="gone"
-            style="@style/customstyle"/>
+            style="@style/customfab"/>
 
     </RelativeLayout>
 

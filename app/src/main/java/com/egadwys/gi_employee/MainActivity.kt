@@ -85,9 +85,22 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
         }
 
         fabOption2.setOnClickListener {
+            vibrate()
             finishAffinity()
         }
 
+    }
+
+    private fun vibrate() {
+        val vibrator = ContextCompat.getSystemService(this, Vibrator::class.java) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Vibrate for 100 milliseconds
+            val vibrationEffect = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            // Deprecated in API 26
+            vibrator.vibrate(50)
+        }
     }
 
     private fun showFABMenu() {
@@ -188,15 +201,7 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
     }
 
     override fun onItemClick(data: YourDataClass) {
-        val vibrator = ContextCompat.getSystemService(this, Vibrator::class.java) as Vibrator
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Vibrate for 100 milliseconds
-            val vibrationEffect = VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE)
-            vibrator.vibrate(vibrationEffect)
-        } else {
-            // Deprecated in API 26
-            vibrator.vibrate(100)
-        }
+        vibrate()
 //        val dialogFragment = DialogFragment()
 //        val bundle = Bundle()
 //        bundle.putString("name", data.name)

@@ -21,15 +21,30 @@
     </style>
     <style name="customstyle">
         <item name="backgroundColor">@color/white</item>
-        <item name="android:textColor">@color/black2</item>
-        <item name="android:textColorHint">@color/black2</item>
-        <item name="android:progressTint">@color/black2</item>
-        <item name="android:indeterminateTint">@color/black2</item>
+        <item name="android:textColor">@color/black3</item>
+        <item name="android:textColorHint">@color/black3</item>
         <item name="cardBackgroundColor">@color/white</item>
         <item name="backgroundTint">@color/black2</item>
         <item name="tint">@color/white</item>
     </style>
+    <style name="customfab">
+        <item name="backgroundTint">@color/black3</item>
+        <item name="tint">@color/white3</item>
+    </style>
+    <style name="customstyleheader">
+        <item name="android:background">@drawable/round_black3</item>
+        <item name="android:backgroundTint">@color/white3</item>
+    </style>
+    <style name="customcard">
+        <item name="cardBackgroundColor">@color/white3</item>
+    </style>
+    <style name="customform">
+        <item name="cardBackgroundColor">@color/white3</item>
+    </style>
     <style name="logo_hris">
         <item name="android:src">@drawable/hris</item>
+    </style>
+    <style name="customprogress">
+        <item name="android:indeterminateTint">@color/black3</item>
     </style>
 </resources>
