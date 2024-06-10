@@ -25,7 +25,7 @@
     <string name="prompt_password">password</string>
     <string name="username">username</string>
     <string name="password">password</string>
-    <string name="login">login</string>
+    <string name="login">Login</string>
     <string name="human_resource_information_sytem">HUMAN RESOURCE\nINFORMATION SYTEM</string>
     <string name="hari">HARI</string>
     <string name="tanggal">TANGGAL</string>
@@ -35,4 +35,8 @@
     <string name="fab_exit_app">FAB EXIT APP</string>
     <string name="fab_main">FAB MAIN</string>
     <string name="autentikasi">autentikasi...</string>
+    <string name="fab_payroll">FAB PAYROLL</string>
+    <string name="periode">Periode</string>
+    <string name="payroll">Payroll</string>
+    <string name="attendance">Attendance</string>
 </resources>

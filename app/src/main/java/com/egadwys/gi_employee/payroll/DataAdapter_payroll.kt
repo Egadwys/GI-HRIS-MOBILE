@@ -1,52 +1,37 @@
-package com.egadwys.gi_employee
+package com.egadwys.gi_employee.payroll
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.egadwys.gi_employee.R
 
-class YourDataAdapter(
-    private var dataList: List<YourDataClass>,
+class DataAdapter_payroll(
+    private var dataList: List<DataClass_payroll>,
     private val itemClickListener: OnItemClickListener
-) : RecyclerView.Adapter<YourDataViewHolder>(), Filterable {
+) : RecyclerView.Adapter<DataViewHolder_payroll>(), Filterable {
 
-    private var filteredDataList: List<YourDataClass> = dataList
+    private var filteredDataList: List<DataClass_payroll> = dataList
 
     interface OnItemClickListener {
-        fun onItemClick(datax: YourDataClass)
+        fun onItemClick(datax: DataClass_payroll)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourDataViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_your_data, parent, false)
-        return YourDataViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder_payroll {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.payroll_recyclerview, parent, false)
+        return DataViewHolder_payroll(view)
     }
 
     override fun onBindViewHolder(
-        holder: YourDataViewHolder,
+        holder: DataViewHolder_payroll,
         position: Int
     ) {
         val item = filteredDataList[position]
-        holder.hari.text = item.hari
-        holder.tanggal.text = item.tanggal
-        holder.tin.text = item.masuk
-        holder.tout.text = item.pulang
+        holder.periode.text = item.periode
 
         holder.bind(item, itemClickListener)
     }
-
-//    @SuppressLint("SetTextI18n")
-//    override fun onBindViewHolder(holder: YourDataViewHolder, position: Int) {
-//        val item = filteredDataList[position]
-//        holder.name.text = item.name
-//        holder.NIK.text = item.NIK.toString()
-//        holder.position.text = item.position
-//        holder.dept.text = item.dept
-//        holder.tin.text = item.masuk
-//        holder.tout.text = item.pulang
-//
-//        holder.bind(item, itemClickListener)
-//    }
 
     override fun getItemCount(): Int {
         return filteredDataList.size
@@ -61,7 +46,7 @@ class YourDataAdapter(
                     dataList
                 } else {
                     dataList.filter {
-                        it.tanggal.contains(charString, true)
+                        it.periode.contains(charString, true)
                     }
                 }
 //                Log.d("Filter", "Filtered data size: ${filteredDataList.size}")
@@ -70,7 +55,7 @@ class YourDataAdapter(
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
 //                Log.d("Filter", "Publishing results for constraint: $constraint")
-                filteredDataList = results?.values as? List<YourDataClass> ?: emptyList()
+                filteredDataList = results?.values as? List<DataClass_payroll> ?: emptyList()
                 notifyDataSetChanged()
             }
         }

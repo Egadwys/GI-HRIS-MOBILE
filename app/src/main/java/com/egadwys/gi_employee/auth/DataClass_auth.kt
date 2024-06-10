@@ -1,6 +1,6 @@
-package com.egadwys.gi_employee
+package com.egadwys.gi_employee.auth
 
-data class LoginDataClass(
+data class DataClass_auth(
     val username: String,
     val password: String,
     val name: String,

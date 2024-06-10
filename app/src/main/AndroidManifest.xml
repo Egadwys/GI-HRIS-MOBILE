@@ -18,19 +18,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".attendance.Attendance"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity" />
         <activity
-            android:name=".DetailEmp"
+            android:name=".payroll.Payroll"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity" />
         <activity
-            android:name=".AuthUser"
+            android:name=".auth.Auth"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"

@@ -1,4 +1,4 @@
-package com.egadwys.gi_employee
+package com.egadwys.gi_employee.attendance
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -13,28 +13,23 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.payroll.Payroll
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.time.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
-class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
+class Attendance : AppCompatActivity(), DataAdapter_attendance.OnItemClickListener {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var loading: LinearLayout
     private lateinit var loadtext: TextView
@@ -44,16 +39,18 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
     private lateinit var fabMain: FloatingActionButton
     private lateinit var fabOption1: FloatingActionButton
     private lateinit var fabOption2: FloatingActionButton
+    private lateinit var fabOption3: FloatingActionButton
     private var isFabOpen = false
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.attendance)
 
         fabMain = findViewById(R.id.fab_main)
         fabOption1 = findViewById(R.id.fab_option1)
         fabOption2 = findViewById(R.id.fab_option2)
+        fabOption3 = findViewById(R.id.fab_option3)
         sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
         loading = findViewById(R.id.loading)
         loadtext = findViewById(R.id.loadtext)
@@ -70,6 +67,7 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
         loaddata(nik.toString())
 
         fabMain.setOnClickListener {
+            vibrate()
             if (isFabOpen) {
                 closeFABMenu()
             } else {
@@ -78,6 +76,8 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
         }
 
         fabOption1.setOnClickListener {
+            vibrate()
+            closeFABMenu()
             sharedPreferences.edit().putString("user", "NoUser").apply()
             sharedPreferences.edit().putString("nama", "NoNama").apply()
             finish()
@@ -86,7 +86,18 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
 
         fabOption2.setOnClickListener {
             vibrate()
+            closeFABMenu()
             finishAffinity()
+        }
+
+        fabOption3.setOnClickListener {
+            vibrate()
+            closeFABMenu()
+            val intent = Intent(this@Attendance, Payroll::class.java).apply {
+                putExtra("username", nik)
+                putExtra("name", title.text)
+            }
+            startActivity(intent)
         }
 
     }
@@ -106,27 +117,31 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
     private fun showFABMenu() {
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         val fadeInAnimation_delay = AnimationUtils.loadAnimation(this, R.anim.fade_in_delay)
+        val fadeInAnimation_delay2 = AnimationUtils.loadAnimation(this, R.anim.fade_in_delay2)
         isFabOpen = true
         fabOption1.visibility = View.VISIBLE
         fabOption2.visibility = View.VISIBLE
+        fabOption3.visibility = View.VISIBLE
         fabOption1.startAnimation(fadeInAnimation)
         fabOption2.startAnimation(fadeInAnimation_delay)
+        fabOption3.startAnimation(fadeInAnimation_delay2)
         rotateFab(fabMain, 0f, 1350f) // Change icon to close
     }
 
-    private fun closeFABMenu() {
-        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+    private fun closeFABMenu() {        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
         isFabOpen = false
         fabOption1.startAnimation(fadeInAnimation)
         fabOption2.startAnimation(fadeInAnimation)
+        fabOption3.startAnimation(fadeInAnimation)
         fabOption1.visibility = View.GONE
         fabOption2.visibility = View.GONE
+        fabOption3.visibility = View.GONE
         rotateFab(fabMain, 1350f, 0f) // Change icon back to add
     }
 
     private fun rotateFab(fab: FloatingActionButton, from: Float, to: Float) {
         val animator = ObjectAnimator.ofFloat(fab, "rotation", from, to)
-        animator.duration = 300
+        animator.duration = 500
         animator.start()
     }
 
@@ -152,15 +167,15 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
 
-        RetrofitClient.instance.getData(nik).enqueue(object : Callback<List<YourDataClass>> {
+        RetrofitClient_attendance.instance.getData(nik).enqueue(object : Callback<List<DataClass_attendance>> {
             @SuppressLint("SetTextI18n")
-            override fun onResponse(call: Call<List<YourDataClass>>, response: Response<List<YourDataClass>>) {
+            override fun onResponse(call: Call<List<DataClass_attendance>>, response: Response<List<DataClass_attendance>>) {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null && data.isNotEmpty()) {
                         runOnUiThread {
-                            mRecyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
-                            val adapter = YourDataAdapter(data, this@MainActivity) // Pass 'this' as itemClickListener
+                            mRecyclerView.layoutManager = GridLayoutManager(this@Attendance, 2)
+                            val adapter = DataAdapter_attendance(data, this@Attendance) // Pass 'this' as itemClickListener
                             mRecyclerView.adapter = adapter
 
                             val searchView: SearchView = findViewById(R.id.searchView)
@@ -178,29 +193,29 @@ class MainActivity : AppCompatActivity(), YourDataAdapter.OnItemClickListener{
                         mRecyclerView.visibility = View.VISIBLE
                         loading.visibility = View.GONE
                     } else {
-                        Toast.makeText(this@MainActivity, "Response body is null or empty", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@Attendance, "Response body is null or empty", Toast.LENGTH_LONG).show()
                     }
                     swipeRefreshLayout.isRefreshing = false
                 } else {
                     mRecyclerView.visibility = View.GONE
                     loading.visibility = View.VISIBLE
                     loadtext.text = "Failed to get data: ${response.message()}"
-                    Toast.makeText(this@MainActivity, "Failed to get data: ${response.message()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Attendance, "Failed to get data: ${response.message()}", Toast.LENGTH_LONG).show()
                     swipeRefreshLayout.isRefreshing = false
                     Log.d("Filter", "Publishing results for constraint: ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<List<YourDataClass>>, t: Throwable) {
+            override fun onFailure(call: Call<List<DataClass_attendance>>, t: Throwable) {
                 Log.e("Request Failed", t.message.toString())
                 loadtext.text = "Failed to get data: ${t.message.toString()}"
-                Toast.makeText(this@MainActivity, "Request failed: ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@Attendance, "Request failed: ${t.message}", Toast.LENGTH_LONG).show()
                 swipeRefreshLayout.isRefreshing = false
             }
         })
     }
 
-    override fun onItemClick(data: YourDataClass) {
+    override fun onItemClick(data: DataClass_attendance) {
         vibrate()
 //        val dialogFragment = DialogFragment()
 //        val bundle = Bundle()

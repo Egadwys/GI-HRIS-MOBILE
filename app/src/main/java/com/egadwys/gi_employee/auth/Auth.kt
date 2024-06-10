@@ -1,4 +1,4 @@
-package com.egadwys.gi_employee
+package com.egadwys.gi_employee.auth
 
 import android.content.Context
 import android.content.Intent
@@ -18,13 +18,15 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.egadwys.gi_employee.attendance.Attendance
+import com.egadwys.gi_employee.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AuthUser : AppCompatActivity() {
+class Auth : AppCompatActivity() {
     private lateinit var button: MaterialButton
     private lateinit var username: TextInputEditText
     private lateinit var password: TextInputEditText
@@ -33,8 +35,8 @@ class AuthUser : AppCompatActivity() {
     private lateinit var loading_auth: LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_auth_user)
+//        enableEdgeToEdge()
+        setContentView(R.layout.auth2)
 
         loading_auth = findViewById(R.id.loading_auth)
         loading_auth.visibility = View.GONE
@@ -45,7 +47,7 @@ class AuthUser : AppCompatActivity() {
         if ( cekuser == "NoUser") {
             Toast.makeText(this, "Silahkan login terlebih dahulu",Toast.LENGTH_SHORT).show()
         } else {
-            val intent = Intent(this@AuthUser, MainActivity::class.java).apply {
+            val intent = Intent(this@Auth, Attendance::class.java).apply {
                 putExtra("username", cekuser)
                 putExtra("name", ceknama)
             }
@@ -69,7 +71,7 @@ class AuthUser : AppCompatActivity() {
                 vibrator.vibrate(50)
             }
             if (username.text.isNullOrBlank() || password.text.isNullOrBlank()) {
-                Toast.makeText(this@AuthUser, "please fill all field", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@Auth, "please fill all field", Toast.LENGTH_LONG).show()
             } else {
                 loading_auth.visibility = View.VISIBLE
                 loading_auth.startAnimation(fadeInAnimationin)
@@ -86,8 +88,8 @@ class AuthUser : AppCompatActivity() {
 
     private fun getdata(user: String, pass: String) {
         val fadeInAnimationout = AnimationUtils.loadAnimation(this, R.anim.fade_out)
-        LoginRetrofitClient.instance.cekuser(user,pass).enqueue(object : Callback<List<LoginDataClass>> {
-            override fun onResponse(call: Call<List<LoginDataClass>>, response: Response<List<LoginDataClass>>) {
+        RetrofitClient_auth.instance.cekuser(user,pass).enqueue(object : Callback<List<DataClass_auth>> {
+            override fun onResponse(call: Call<List<DataClass_auth>>, response: Response<List<DataClass_auth>>) {
                 if (response.isSuccessful) {
                     loading_auth.startAnimation(fadeInAnimationout)
                     loading_auth.visibility = View.GONE
@@ -96,7 +98,7 @@ class AuthUser : AppCompatActivity() {
                             val loginData = loginDataList[0]
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
-                            val intent = Intent(this@AuthUser, MainActivity::class.java).apply {
+                            val intent = Intent(this@Auth, Attendance::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)
                             }
@@ -107,15 +109,15 @@ class AuthUser : AppCompatActivity() {
                 } else {
                     loading_auth.startAnimation(fadeInAnimationout)
                     loading_auth.visibility = View.GONE
-                    Toast.makeText(this@AuthUser, "User tidak ditemukan, periksa username dan password", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Auth, "User tidak ditemukan, periksa username dan password", Toast.LENGTH_LONG).show()
 //                    Toast.makeText(this@AuthUser, "Failed to get data: ${response.message()}", Toast.LENGTH_LONG).show()
                 }
             }
 
-            override fun onFailure(call: Call<List<LoginDataClass>>, t: Throwable) {
+            override fun onFailure(call: Call<List<DataClass_auth>>, t: Throwable) {
                 loading_auth.startAnimation(fadeInAnimationout)
                 loading_auth.visibility = View.GONE
-                Toast.makeText(this@AuthUser, "Autentikasi gagal!, tidak dapat terhubung ke server", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@Auth, "Autentikasi gagal!, tidak dapat terhubung ke server", Toast.LENGTH_LONG).show()
 //                Toast.makeText(this@AuthUser, "Request failed: ${t.message}", Toast.LENGTH_LONG).show()
                 Log.e("Request Failed E", t.message.toString())
                 Log.d("Request Failed D", t.message.toString())

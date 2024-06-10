@@ -1,6 +1,6 @@
-package com.egadwys.gi_employee
+package com.egadwys.gi_employee.attendance
 
-data class YourDataClass(
+data class DataClass_attendance(
     val nik: String,
     val idx: String,
     val tanggal: String,
