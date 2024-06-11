@@ -217,23 +217,5 @@ class Attendance : AppCompatActivity(), DataAdapter_attendance.OnItemClickListen
 
     override fun onItemClick(data: DataClass_attendance) {
         vibrate()
-//        val dialogFragment = DialogFragment()
-//        val bundle = Bundle()
-//        bundle.putString("name", data.name)
-//        bundle.putString("position", data.position)
-//        bundle.putString("nik", data.NIK.toString())
-//        bundle.putString("dept", data.dept)
-//        bundle.putString("div", data.division)
-//        bundle.putString("wg", data.Workgroup)
-//        bundle.putString("birth", data.dateBirth)
-//        bundle.putString("kec", data.kecamatan)
-//        bundle.putString("kel", data.kelurahan)
-//        bundle.putString("kota", data.kota)
-//        bundle.putString("prov", data.provinsi)
-//        bundle.putString("negara", data.negara)
-//        bundle.putString("tin", data.masuk)
-//        bundle.putString("tout", data.pulang)
-//        dialogFragment.arguments = bundle
-//        dialogFragment.show(supportFragmentManager, "CustomDialogFragmentTag")
     }
 }

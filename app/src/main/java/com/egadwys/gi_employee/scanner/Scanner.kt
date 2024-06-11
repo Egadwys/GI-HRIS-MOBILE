@@ -1,14 +1,23 @@
 package com.egadwys.gi_employee.scanner
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.appcompat.app.AppCompatActivity
@@ -20,10 +29,11 @@ import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
-import androidx.camera.core.TorchState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
 import com.egadwys.gi_employee.attendance.Attendance
@@ -33,6 +43,9 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -46,10 +59,14 @@ class Scanner : AppCompatActivity() {
     private var isProcessing = false
     private var isFlashlightOn = false
     private val CAMERA_REQUEST_CODE = 101
+    private lateinit var loading_scanner: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.scanner)
+
+        loading_scanner = findViewById(R.id.loading_scanner)
+        loading_scanner.visibility = View.GONE
 
         sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
         val flashlightButton: Button = findViewById(R.id.flashlightButton)
@@ -152,19 +169,19 @@ class Scanner : AppCompatActivity() {
                 .addOnSuccessListener { barcodes ->
                     if (barcodes.isNotEmpty()  && !isProcessing) {
                         isProcessing = true
+                        vibrate()
                         val barcode = barcodes[0]
-                        sharedPreferences.edit().putString("user", barcode.rawValue).apply()
-                        sharedPreferences.edit().putString("nama", barcode.rawValue).apply()
-                        val intent = Intent(this@Scanner, Attendance::class.java).apply {
-                            putExtra("username", barcode.rawValue)
-                            putExtra("name", barcode.rawValue)
-                        }
-                        startActivity(intent)
-                        finish()
+                        val user = barcode.rawValue
+                        val fadeInAnimationin = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+                        loading_scanner.visibility = View.VISIBLE
+                        loading_scanner.startAnimation(fadeInAnimationin)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            getdata(user.toString())
+                        }, 1000)
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Toast.makeText(this, "Barcode scanning failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+                    Log.d("failur: ", exception.message.toString())
                 }
                 .addOnCompleteListener {
                     imageProxy.close()
@@ -176,7 +193,89 @@ class Scanner : AppCompatActivity() {
         cameraControl?.enableTorch(enable)?.addListener({
             isFlashlightOn = enable
             val message = if (enable) "Flashlight turned on" else "Flashlight turned off"
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun getdata(user: String) {
+        val fadeInAnimationout = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+        RetrofitClient_scanner.instance.cekuser(user).enqueue(object :
+            Callback<List<DataClass_scanner>> {
+            override fun onResponse(call: Call<List<DataClass_scanner>>, response: Response<List<DataClass_scanner>>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { loginDataList ->
+                        if (loginDataList.isNotEmpty()) {
+                            val loginData = loginDataList[0]
+                            createNotificationChannel(this@Scanner, loginData.name)
+                            sendNotification(this@Scanner, loginData.name)
+                            sharedPreferences.edit().putString("user", loginData.username).apply()
+                            sharedPreferences.edit().putString("nama", loginData.name).apply()
+                            val intent = Intent(this@Scanner, Attendance::class.java).apply {
+                                putExtra("username", loginData.username)
+                                putExtra("name", loginData.name)
+                            }
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                    Log.d("OK: ", "${response.body()}")
+                } else {
+                    loading_scanner.startAnimation(fadeInAnimationout)
+                    loading_scanner.visibility = View.GONE
+                    Toast.makeText(this@Scanner, "Response: ${response.message()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<DataClass_scanner>>, t: Throwable) {
+                loading_scanner.startAnimation(fadeInAnimationout)
+                loading_scanner.visibility = View.GONE
+                Toast.makeText(this@Scanner, "Failure: ${t.message.toString()}", Toast.LENGTH_SHORT).show()
+                Log.e("Request Failed E", t.message.toString())
+            }
+        })
+    }
+
+    private fun vibrate() {
+        val vibrator = ContextCompat.getSystemService(this, Vibrator::class.java) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Vibrate for 100 milliseconds
+            val vibrationEffect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            // Deprecated in API 26
+            vibrator.vibrate(500)
+        }
+    }
+
+    fun createNotificationChannel(context: Context, name: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Login success"
+            val descriptionText = "Hello $name"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("CHANNEL_ID", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    fun sendNotification(context: Context, name: String) {
+        val builder = NotificationCompat.Builder(context, "CHANNEL_ID")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle("Login success")
+            .setContentText("Hello $name")
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+
+        with(NotificationManagerCompat.from(context)) {
+            if (ActivityCompat.checkSelfPermission(
+                    this@Scanner,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            notify(1, builder.build())
+        }
     }
 }

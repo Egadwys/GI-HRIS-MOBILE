@@ -1,6 +1,8 @@
 package com.egadwys.gi_employee.auth
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -23,6 +25,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.attendance.Attendance
 import com.egadwys.gi_employee.R
@@ -52,6 +56,7 @@ class Auth : AppCompatActivity() {
 
         scan = findViewById(R.id.testscanner)
         scan.setOnClickListener {
+            vibrate()
             val intent = Intent(this@Auth, Scanner::class.java)
             startActivity(intent)
         }
@@ -80,18 +85,10 @@ class Auth : AppCompatActivity() {
         button = findViewById(R.id.btn_login)
         username = findViewById(R.id.username)
         password = findViewById(R.id.password)
-        val vibrator = ContextCompat.getSystemService(this,Vibrator::class.java) as Vibrator
 
         val fadeInAnimationin = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         button.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // Vibrate for 100 milliseconds
-                val vibrationEffect = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
-                vibrator.vibrate(vibrationEffect)
-            } else {
-                // Deprecated in API 26
-                vibrator.vibrate(50)
-            }
+            vibrate()
             if (username.text.isNullOrBlank() || password.text.isNullOrBlank()) {
                 Toast.makeText(this@Auth, "please fill all field", Toast.LENGTH_LONG).show()
             } else {
@@ -108,16 +105,29 @@ class Auth : AppCompatActivity() {
 
     }
 
+    private fun vibrate() {
+        val vibrator = ContextCompat.getSystemService(this,Vibrator::class.java) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Vibrate for 100 milliseconds
+            val vibrationEffect = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            // Deprecated in API 26
+            vibrator.vibrate(50)
+        }
+    }
+
     private fun getdata(user: String, pass: String) {
         val fadeInAnimationout = AnimationUtils.loadAnimation(this, R.anim.fade_out)
         RetrofitClient_auth.instance.cekuser(user,pass).enqueue(object : Callback<List<DataClass_auth>> {
             override fun onResponse(call: Call<List<DataClass_auth>>, response: Response<List<DataClass_auth>>) {
+                vibratex()
                 if (response.isSuccessful) {
-                    loading_auth.startAnimation(fadeInAnimationout)
-                    loading_auth.visibility = View.GONE
                     response.body()?.let { loginDataList ->
                         if (loginDataList.isNotEmpty()) {
                             val loginData = loginDataList[0]
+                            createNotificationChannel(this@Auth, loginData.name)
+                            sendNotification(this@Auth, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
                             val intent = Intent(this@Auth, Attendance::class.java).apply {
@@ -137,6 +147,7 @@ class Auth : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<DataClass_auth>>, t: Throwable) {
+                vibratex()
                 loading_auth.startAnimation(fadeInAnimationout)
                 loading_auth.visibility = View.GONE
                 Toast.makeText(this@Auth, "Autentikasi gagal!, tidak dapat terhubung ke server", Toast.LENGTH_LONG).show()
@@ -145,5 +156,50 @@ class Auth : AppCompatActivity() {
                 Log.d("Request Failed D", t.message.toString())
             }
         })
+    }
+
+    private fun vibratex() {
+        val vibrator = ContextCompat.getSystemService(this, Vibrator::class.java) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Vibrate for 100 milliseconds
+            val vibrationEffect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            // Deprecated in API 26
+            vibrator.vibrate(500)
+        }
+    }
+
+    fun createNotificationChannel(context: Context, name: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Login success"
+            val descriptionText = "Hello $name"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("CHANNEL_ID", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    fun sendNotification(context: Context, name: String) {
+        val builder = NotificationCompat.Builder(context, "CHANNEL_ID")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle("Login success")
+            .setContentText("Hello $name")
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+
+        with(NotificationManagerCompat.from(context)) {
+            if (ActivityCompat.checkSelfPermission(
+                    this@Auth,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            notify(1, builder.build())
+        }
     }
 }
