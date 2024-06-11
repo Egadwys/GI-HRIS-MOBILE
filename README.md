@@ -12,13 +12,6 @@ Android-based HRIS application with API integration
       <td>
         <img src="https://raw.githubusercontent.com/Egadwys/GI-HRIS-MOBILE/master/preview/idcard_scanner.jpg" width="100%"/>
       </td>
-    </tr>
-  </tbody>
-</table>
-<br>
-<table>
-  <tbody>
-    <tr>
       <td>
         <img src="https://raw.githubusercontent.com/Egadwys/GI-HRIS-MOBILE/master/preview/attendance.jpg" width="100%"/>
       </td>
@@ -28,4 +21,5 @@ Android-based HRIS application with API integration
     </tr>
   </tbody>
 </table>
-<br><br>
+<i>*click to zoom image</i>
+<br>
