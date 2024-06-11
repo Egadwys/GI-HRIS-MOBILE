@@ -39,4 +39,5 @@
     <string name="periode">Periode</string>
     <string name="payroll">Payroll</string>
     <string name="attendance">Attendance</string>
+    <string name="toggle_flashlight">Toggle Flashlight</string>
 </resources>

@@ -1,8 +1,12 @@
 package com.egadwys.gi_employee.auth
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -12,16 +16,23 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.attendance.Attendance
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.scanner.Scanner
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.mlkit.vision.barcode.BarcodeScanner
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,10 +44,22 @@ class Auth : AppCompatActivity() {
     private lateinit var glide: ImageView
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var loading_auth: LinearLayout
+    private lateinit var scan: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
         setContentView(R.layout.auth2)
+
+        scan = findViewById(R.id.testscanner)
+        scan.setOnClickListener {
+            val intent = Intent(this@Auth, Scanner::class.java)
+            startActivity(intent)
+        }
+
+        val receivedString = intent.getStringExtra("barcode")
+        if (receivedString != null) {
+            Toast.makeText(this, receivedString,Toast.LENGTH_SHORT).show()
+        }
 
         loading_auth = findViewById(R.id.loading_auth)
         loading_auth.visibility = View.GONE
@@ -45,7 +68,6 @@ class Auth : AppCompatActivity() {
         val cekuser = sharedPreferences.getString("user", "NoUser")
         val ceknama = sharedPreferences.getString("nama", "NoNama")
         if ( cekuser == "NoUser") {
-            Toast.makeText(this, "Silahkan login terlebih dahulu",Toast.LENGTH_SHORT).show()
         } else {
             val intent = Intent(this@Auth, Attendance::class.java).apply {
                 putExtra("username", cekuser)

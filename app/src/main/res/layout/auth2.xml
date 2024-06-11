@@ -145,14 +145,34 @@
 
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
+                <LinearLayout
                     android:layout_width="match_parent"
-                    app:rippleColor="@color/white"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:cornerRadius="10dp"
-                    android:id="@+id/btn_login"
-                    android:text="@string/login"/>
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:cornerRadius="10dp"
+                        app:rippleColor="@color/white"
+                        android:id="@+id/btn_login"
+                        android:text="@string/login"/>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/blueMIS"
+                        android:id="@+id/testscanner"
+                        android:src="@drawable/ic_qr">
+                    </ImageButton>
+
+                </LinearLayout>
 
             </LinearLayout>
 
