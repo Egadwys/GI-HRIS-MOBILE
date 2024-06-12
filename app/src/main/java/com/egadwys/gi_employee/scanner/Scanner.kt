@@ -250,7 +250,7 @@ class Scanner : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Login success"
             val descriptionText = "Hello $name"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel("CHANNEL_ID", name, importance).apply {
                 description = descriptionText
             }
@@ -266,6 +266,8 @@ class Scanner : AppCompatActivity() {
             .setContentTitle("Login success")
             .setContentText("Hello $name")
             .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setDefaults(NotificationCompat.PRIORITY_MAX)
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
 
         with(NotificationManagerCompat.from(context)) {
             if (ActivityCompat.checkSelfPermission(

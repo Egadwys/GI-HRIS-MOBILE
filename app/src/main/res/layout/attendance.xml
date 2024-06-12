@@ -36,15 +36,16 @@
                     android:contentDescription="@string/logo_hris" />
 
                 <TextView
+                    android:id="@+id/main_subtitle_header"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/main_subtitle_header"
                     android:gravity="end"
-                    android:textSize="18sp"
                     android:maxLines="1"
+                    android:text="@string/attendance"
+                    android:textSize="18sp"
                     android:textStyle="italic"
-                    android:text="@string/attendance" />
+                    tools:ignore="TextContrastCheck" />
 
             </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.egadwys.gi_employee.payroll
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -22,6 +23,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.attendance.Attendance
+import com.egadwys.gi_employee.payroll.detail.Detail
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
@@ -126,6 +129,10 @@ class Payroll : AppCompatActivity(), DataAdapter_payroll.OnItemClickListener {
 
     override fun onItemClick(data: DataClass_payroll) {
         vibrate()
-        Toast.makeText(this, "ID: ${data.id}\nPeriode: ${data.periode}", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@Payroll, Detail::class.java).apply {
+            putExtra("id", data.id)
+        }
+        startActivity(intent)
+//        Toast.makeText(this, "ID: ${data.id}\nPeriode: ${data.periode}", Toast.LENGTH_SHORT).show()
     }
 }

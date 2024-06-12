@@ -76,6 +76,7 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="50dp"
                 android:layout_weight="1"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/anim_login"
                 android:clickable="false"/>
 
@@ -102,15 +103,16 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/username"
+                            style="@style/customstyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
-                            style="@style/customstyle"
                             android:hint="@string/username"
-                            android:singleLine="true"
                             android:inputType="text"
+                            android:singleLine="true"
                             android:textSize="18sp"
-                            android:textStyle="bold|italic"/>
+                            android:textStyle="bold|italic"
+                            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -131,15 +133,16 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password"
+                            style="@style/customstyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
-                            style="@style/customstyle"
-                            android:singleLine="true"
-                            android:inputType="textPassword"
                             android:hint="@string/password"
+                            android:inputType="textPassword"
+                            android:singleLine="true"
                             android:textSize="18sp"
-                            android:textStyle="bold|italic" />
+                            android:textStyle="bold|italic"
+                            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -152,13 +155,15 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_login"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:text="@string/login"
+                        android:textColor="@color/white"
                         app:cornerRadius="10dp"
                         app:rippleColor="@color/white"
-                        android:id="@+id/btn_login"
-                        android:text="@string/login"/>
+                        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
                     <View
                         android:layout_width="10dp"

@@ -7,8 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -18,11 +16,9 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -30,13 +26,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.attendance.Attendance
 import com.egadwys.gi_employee.R
-import com.egadwys.gi_employee.scanner.Scanner
+import com.egadwys.gi_employee.payroll.detail.Detail
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.mlkit.vision.barcode.BarcodeScanner
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.google.mlkit.vision.barcode.common.Barcode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,7 +49,7 @@ class Auth : AppCompatActivity() {
         scan = findViewById(R.id.testscanner)
         scan.setOnClickListener {
             vibrate()
-            val intent = Intent(this@Auth, Scanner::class.java)
+            val intent = Intent(this@Auth, Detail::class.java)
             startActivity(intent)
         }
 

@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/title1_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title1_detail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="Pendapatan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row1_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:textAllCaps="true"
+            android:text="@string/umk"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:textAllCaps="true"
+            android:text="@string/umk"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row2_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_jabatan"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_jabatan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row3_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_keterampilan"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_keterampilan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row4_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_utility"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_utility"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row5_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_shift_2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_shift_2"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row6_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_shift_3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/tunjangan_shift_3"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row7_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row8_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_2"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row9_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_3"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row10_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_4"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/lembur_4"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row11_detaiil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/total_pendapatan"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/total_pendapatan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/title2_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title2_detail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="@string/potongan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row1_detaiil_potongan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/bpjs_kesehatan"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail_potongan1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/bpjs_kesehatan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row2_detaiil_potongan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/bpjs_ketenagakerjaan"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail_potongan2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/bpjs_ketenagakerjaan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row3_detaiil_potongan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/keanggotaan_koperasi"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail_potongan3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/keanggotaan_koperasi"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row4_detaiil_potongan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/potongan_koperasi"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail_potongan4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/potongan_koperasi"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row5_detaiil_potongan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/total_potongan"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/titikdua"/>
+
+        <TextView
+            android:id="@+id/detail_potongan5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/total_potongan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/title3_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title3_detail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="@string/gaji_terima"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row1_detaiil_terima"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/detail_terima1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="@string/total_potongan"/>
+
+    </LinearLayout>
+
+</LinearLayout>

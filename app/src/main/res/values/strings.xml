@@ -40,4 +40,24 @@
     <string name="payroll">Payroll</string>
     <string name="attendance">Attendance</string>
     <string name="toggle_flashlight">Toggle Flashlight</string>
+    <string name="titikdua">:</string>
+    <string name="umk">Umk</string>
+    <string name="tunjangan_jabatan">Tunjangan jabatan</string>
+    <string name="tunjangan_keterampilan">Tunjangan keterampilan</string>
+    <string name="tunjangan_utility">Tunjangan utility</string>
+    <string name="tunjangan_shift_2">Tunjangan shift 2</string>
+    <string name="tunjangan_shift_3">Tunjangan shift 3</string>
+    <string name="lembur_1">Lembur 1</string>
+    <string name="lembur_2">Lembur 2</string>
+    <string name="lembur_3">Lembur 3</string>
+    <string name="lembur_4">Lembur 4</string>
+    <string name="bpjs_kesehatan">BPJS kesehatan</string>
+    <string name="bpjs_ketenagakerjaan">BPJS ketenagakerjaan</string>
+    <string name="keanggotaan_koperasi">Keanggotaan koperasi</string>
+    <string name="potongan_koperasi">Potongan koperasi</string>
+    <string name="total_potongan">Total potongan</string>
+    <string name="total_pendapatan">Total pendapatan</string>
+    <string name="gaji_terima">Gaji terima</string>
+    <string name="potongan">Potongan</string>
+    <string name="rp">"Rp. "</string>
 </resources>

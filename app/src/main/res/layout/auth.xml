@@ -1,6 +1,7 @@
 <!-- item_your_data.xml -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/customstyle">
@@ -23,12 +24,14 @@
         <ImageView
             android:id="@+id/animationView"
             android:layout_width="match_parent"
-            android:src="@drawable/anim_login"
-            android:clickable="false"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp" />
+            android:layout_weight="1"
+            android:clickable="false"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/anim_login"
+            tools:ignore="ImageContrastCheck" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -51,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="4dp"
-                    android:layout_gravity="left"
+                    android:layout_gravity="start"
                     android:orientation="horizontal"
                     android:gravity="center">
 
@@ -104,15 +107,16 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/username"
+                            style="@style/customstyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
-                            style="@style/customstyle"
                             android:hint="@string/username"
-                            android:singleLine="true"
                             android:inputType="text"
+                            android:singleLine="true"
                             android:textSize="18sp"
-                            android:textStyle="bold|italic"/>
+                            android:textStyle="bold|italic"
+                            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -133,28 +137,30 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password"
+                            style="@style/customstyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="10dp"
-                            style="@style/customstyle"
-                            android:singleLine="true"
-                            android:inputType="textPassword"
                             android:hint="@string/password"
+                            android:inputType="textPassword"
+                            android:singleLine="true"
                             android:textSize="18sp"
-                            android:textStyle="bold|italic" />
+                            android:textStyle="bold|italic"
+                            tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login"
                     android:layout_width="match_parent"
-                    app:rippleColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:text="@string/login"
                     app:cornerRadius="10dp"
-                    android:id="@+id/btn_login"
-                    android:text="@string/login"/>
+                    app:rippleColor="@color/white"
+                    tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
             </LinearLayout>
 

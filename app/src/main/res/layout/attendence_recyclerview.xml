@@ -1,5 +1,6 @@
 <!-- item_your_data.xml -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -51,11 +52,12 @@
                     android:id="@+id/tin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="10dp"
                     android:gravity="center"
-                    android:textColor="@color/white"
+                    android:paddingHorizontal="10dp"
                     android:text="@string/time_in"
-                    android:textSize="13sp" />
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    tools:ignore="TextContrastCheck" />
 
             </androidx.cardview.widget.CardView>
 
@@ -73,9 +75,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="10dp"
-                    android:textColor="@color/white"
                     android:text="@string/time_out"
-                    android:textSize="13sp" />
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    tools:ignore="TextContrastCheck" />
 
             </androidx.cardview.widget.CardView>
 
