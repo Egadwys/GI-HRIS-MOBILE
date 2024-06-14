@@ -36,7 +36,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
-import com.egadwys.gi_employee.attendance.Attendance
+import com.egadwys.gi_employee.dashboard.Dashboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -181,6 +181,8 @@ class Scanner : AppCompatActivity() {
                     }
                 }
                 .addOnFailureListener { exception ->
+                    finish()
+                    Toast.makeText(this, exception.message.toString(), Toast.LENGTH_SHORT).show()
                     Log.d("failur: ", exception.message.toString())
                 }
                 .addOnCompleteListener {
@@ -209,7 +211,7 @@ class Scanner : AppCompatActivity() {
                             sendNotification(this@Scanner, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
-                            val intent = Intent(this@Scanner, Attendance::class.java).apply {
+                            val intent = Intent(this@Scanner, Dashboard::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)
                             }
@@ -217,19 +219,18 @@ class Scanner : AppCompatActivity() {
                             finish()
                         }
                     }
-                    Log.d("OK: ", "${response.body()}")
+                    Log.d("resonse: ", response.message())
                 } else {
-                    loading_scanner.startAnimation(fadeInAnimationout)
-                    loading_scanner.visibility = View.GONE
+                    finish()
                     Toast.makeText(this@Scanner, "Response: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.d("response, but not", response.message())
                 }
             }
 
             override fun onFailure(call: Call<List<DataClass_scanner>>, t: Throwable) {
-                loading_scanner.startAnimation(fadeInAnimationout)
-                loading_scanner.visibility = View.GONE
-                Toast.makeText(this@Scanner, "Failure: ${t.message.toString()}", Toast.LENGTH_SHORT).show()
-                Log.e("Request Failed E", t.message.toString())
+                finish()
+                Toast.makeText(this@Scanner, "Request Failed: ${t.message.toString()}", Toast.LENGTH_SHORT).show()
+                Log.e("Request Failed: ", t.message.toString())
             }
         })
     }

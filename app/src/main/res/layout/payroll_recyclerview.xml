@@ -24,7 +24,7 @@
             style="@style/customstyle"
             android:text="@string/periode"
             android:hint="@string/periode"
-            android:textSize="13sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
     </LinearLayout>

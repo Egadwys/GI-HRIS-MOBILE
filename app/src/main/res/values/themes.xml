@@ -31,9 +31,20 @@
         <item name="backgroundTint">@color/black3</item>
         <item name="tint">@color/white3</item>
     </style>
+    <style name="custompic">
+        <item name="android:tint">@color/black3</item>
+    </style>
+    <style name="customcnb">
+        <item name="cnb_iconColor">@color/black3</item>
+        <item name="cnb_unselectedColor">@color/black3</item>
+    </style>
     <style name="customstyleheader">
         <item name="android:background">@drawable/round_black3</item>
         <item name="android:backgroundTint">@color/white3</item>
+    </style>
+    <style name="customstylefooter">
+        <item name="android:background">@drawable/footer_round</item>
+        <item name="android:backgroundTint">#7C6FF4</item>
     </style>
     <style name="customcard">
         <item name="cardBackgroundColor">@color/white3</item>

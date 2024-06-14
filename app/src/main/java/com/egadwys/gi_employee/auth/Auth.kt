@@ -24,9 +24,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.egadwys.gi_employee.attendance.Attendance
 import com.egadwys.gi_employee.R
-import com.egadwys.gi_employee.payroll.detail.Detail
+import com.egadwys.gi_employee.dashboard.Dashboard
+import com.egadwys.gi_employee.scanner.Scanner
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -49,7 +49,7 @@ class Auth : AppCompatActivity() {
         scan = findViewById(R.id.testscanner)
         scan.setOnClickListener {
             vibrate()
-            val intent = Intent(this@Auth, Detail::class.java)
+            val intent = Intent(this@Auth, Scanner::class.java)
             startActivity(intent)
         }
 
@@ -66,7 +66,7 @@ class Auth : AppCompatActivity() {
         val ceknama = sharedPreferences.getString("nama", "NoNama")
         if ( cekuser == "NoUser") {
         } else {
-            val intent = Intent(this@Auth, Attendance::class.java).apply {
+            val intent = Intent(this@Auth, Dashboard::class.java).apply {
                 putExtra("username", cekuser)
                 putExtra("name", ceknama)
             }
@@ -122,7 +122,7 @@ class Auth : AppCompatActivity() {
                             sendNotification(this@Auth, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
-                            val intent = Intent(this@Auth, Attendance::class.java).apply {
+                            val intent = Intent(this@Auth, Dashboard::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)
                             }

@@ -9,9 +9,9 @@ object RetrofitClient_scanner {
     private const val BASE_URL = "http://192.168.10.242:8078/api/"
 
     private val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(300, TimeUnit.SECONDS)
-        .readTimeout(300, TimeUnit.SECONDS)
-        .writeTimeout(300, TimeUnit.SECONDS)
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
         .build()
 
     val instance: ApiService_scanner by lazy {

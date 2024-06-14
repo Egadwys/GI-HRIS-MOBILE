@@ -60,4 +60,8 @@
     <string name="gaji_terima">Gaji terima</string>
     <string name="potongan">Potongan</string>
     <string name="rp">"Rp. "</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="greeting">Wellcome, Ega!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
