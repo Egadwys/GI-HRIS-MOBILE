@@ -11,8 +11,8 @@
         android:title="@string/attendance"
         app:cnb_iconColor="@color/blueMIS"/>
     <item
-        android:id="@+id/menu_payroll"
-        android:icon="@drawable/ic_money"
-        android:title="@string/payroll"
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_account"
+        android:title="@string/profile"
         app:cnb_iconColor="@color/blueMIS" />
 </menu>

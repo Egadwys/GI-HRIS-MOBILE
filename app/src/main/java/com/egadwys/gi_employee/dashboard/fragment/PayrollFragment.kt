@@ -31,7 +31,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PayrollFragment : Fragment(), DataAdapter_payroll.OnItemClickListener {
-
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var loading: LinearLayout
     private lateinit var loadtext: TextView

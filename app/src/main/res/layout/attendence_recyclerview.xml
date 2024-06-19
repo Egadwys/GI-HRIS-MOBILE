@@ -1,7 +1,7 @@
 <!-- item_your_data.xml -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
@@ -15,12 +15,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -30,7 +31,7 @@
                 style="@style/customstyle"
                 android:text="@string/hari"
                 android:hint="@string/hari"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,14 +41,15 @@
                 style="@style/customstyle"
                 android:text="@string/tanggal"
                 android:hint="@string/tanggal"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -65,7 +67,7 @@
                     android:paddingHorizontal="10dp"
                     android:text="@string/time_in"
                     android:textColor="@color/white"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     tools:ignore="TextContrastCheck" />
 
             </androidx.cardview.widget.CardView>
@@ -86,7 +88,7 @@
                     android:paddingHorizontal="10dp"
                     android:text="@string/time_out"
                     android:textColor="@color/white"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     tools:ignore="TextContrastCheck" />
 
             </androidx.cardview.widget.CardView>
