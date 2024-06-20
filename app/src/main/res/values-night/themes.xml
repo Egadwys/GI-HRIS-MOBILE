@@ -44,14 +44,14 @@
     </style>
     <style name="customstyleheaderinvers">
         <item name="android:background">@drawable/round_black3</item>
-        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:backgroundTint">@color/blueMISDARKtrans</item>
     </style>
     <style name="customstyletextinvers">
         <item name="android:textColor">@color/white3</item>
     </style>
     <style name="customstylefooter">
         <item name="android:background">@drawable/footer_round</item>
-        <item name="android:backgroundTint">#7C6FF4</item>
+        <item name="android:backgroundTint">#1b2a3c</item>
     </style>
     <style name="customcard">
         <item name="cardBackgroundColor">@color/black3</item>

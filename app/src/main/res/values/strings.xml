@@ -77,4 +77,7 @@
     <string name="rekap_koperasi">Rekap koperasi</string>
     <string name="rekap_cuti">Rekap cuti</string>
     <string name="rekap_spl">Rekap SPL</string>
+    <string name="navigation_drawer">NAVIGATION DRAWER</string>
+    <string name="navigation_drawer_open">open\n</string>
+    <string name="navigation_drawer_close">close</string>
 </resources>

@@ -13,4 +13,6 @@
     <color name="white3">#eeeeee</color>
     <color name="blueMIS">#0575e6</color>
     <color name="blueMISDARK">#034e99</color>
+    <color name="blueMIStrans">#cddcee</color>
+    <color name="blueMISDARKtrans">#CC1B2A3C</color>
 </resources>

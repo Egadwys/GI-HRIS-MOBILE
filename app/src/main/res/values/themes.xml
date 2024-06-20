@@ -44,6 +44,7 @@
     </style>
     <style name="customstyleheaderinvers">
         <item name="android:background">@drawable/round_black3</item>
+        <item name="android:backgroundTint">@color/blueMIStrans</item>
     </style>
     <style name="customstyletextinvers">
         <item name="android:textColor">@color/black3</item>
