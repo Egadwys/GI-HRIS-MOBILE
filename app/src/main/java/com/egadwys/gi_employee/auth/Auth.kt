@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
 import com.egadwys.gi_employee.dashboard.Dashboard
 import com.egadwys.gi_employee.scanner.Scanner
+import com.egadwys.gi_employee.splash.SplashScreen
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -66,10 +67,7 @@ class Auth : AppCompatActivity() {
         val ceknama = sharedPreferences.getString("nama", "NoNama")
         if ( cekuser == "NoUser") {
         } else {
-            val intent = Intent(this@Auth, Dashboard::class.java).apply {
-                putExtra("username", cekuser)
-                putExtra("name", ceknama)
-            }
+            val intent = Intent(this@Auth, SplashScreen::class.java)
             startActivity(intent)
         }
 //        glide = findViewById(R.id.animationView)
@@ -122,7 +120,7 @@ class Auth : AppCompatActivity() {
                             sendNotification(this@Auth, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
-                            val intent = Intent(this@Auth, Dashboard::class.java).apply {
+                            val intent = Intent(this@Auth, SplashScreen::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)
                             }

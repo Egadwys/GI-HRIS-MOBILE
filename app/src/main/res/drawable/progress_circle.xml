@@ -1,12 +1,11 @@
-<!-- res/drawable/custom_progress_bar.xml -->
+<!-- res/drawable/circular_progress_bar.xml -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape android:shape="ring"
             android:innerRadiusRatio="3"
+            android:thicknessRatio="8"
             android:useLevel="false">
-            <size android:width="10dp"
-                android:height="10dp" />
-            <solid android:color="#D3D3D3"/> <!-- Background color -->
+            <solid android:color="#E0E0E0"/>
         </shape>
     </item>
     <item android:id="@android:id/progress">
@@ -15,10 +14,9 @@
             android:toDegrees="270">
             <shape android:shape="ring"
                 android:innerRadiusRatio="3"
+                android:thicknessRatio="8"
                 android:useLevel="true">
-                <size android:width="10dp"
-                    android:height="10dp" />
-                <solid android:color="#FF0000"/> <!-- Progress color -->
+                <solid android:color="#3F51B5"/>
             </shape>
         </rotate>
     </item>

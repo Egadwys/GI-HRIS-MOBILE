@@ -14,11 +14,13 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="TransparentDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="customstyle">
         <item name="backgroundColor">@color/white</item>
         <item name="android:textColor">@color/black3</item>
@@ -27,42 +29,67 @@
         <item name="backgroundTint">@color/black2</item>
         <item name="tint">@color/white</item>
     </style>
+
     <style name="customfab">
         <item name="backgroundTint">@color/black3</item>
         <item name="tint">@color/white3</item>
     </style>
+
     <style name="custompic">
         <item name="android:tint">@color/black3</item>
     </style>
+
     <style name="customcnb">
         <item name="cnb_iconColor">@color/black3</item>
         <item name="cnb_unselectedColor">@color/black3</item>
     </style>
+
     <style name="customstyleheader">
         <item name="android:background">@drawable/round_black3</item>
         <item name="android:backgroundTint">@color/white3</item>
     </style>
+
     <style name="customstyleheaderinvers">
         <item name="android:background">@drawable/round_black3</item>
         <item name="android:backgroundTint">@color/blueMIStrans</item>
     </style>
+
     <style name="customstyletextinvers">
         <item name="android:textColor">@color/black3</item>
     </style>
+
     <style name="customstylefooter">
         <item name="android:background">@drawable/footer_round</item>
         <item name="android:backgroundTint">#7C6FF4</item>
     </style>
+
     <style name="customcard">
         <item name="cardBackgroundColor">@color/white3</item>
     </style>
+
     <style name="customform">
         <item name="cardBackgroundColor">@color/white3</item>
     </style>
+
     <style name="logo_hris">
         <item name="android:src">@drawable/hris</item>
     </style>
+
     <style name="customprogress">
         <item name="android:indeterminateTint">@color/black3</item>
+    </style>
+
+    <style name="Theme.GIEMPLOYEE.Fullscreen" parent="Theme.GIEMPLOYEE">
+        <item name="android:actionBarStyle">@style/Widget.Theme.GIEMPLOYEE.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ThemeOverlay.GIEMPLOYEE.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 </resources>

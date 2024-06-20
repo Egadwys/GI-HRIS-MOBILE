@@ -80,4 +80,7 @@
     <string name="navigation_drawer">NAVIGATION DRAWER</string>
     <string name="navigation_drawer_open">open\n</string>
     <string name="navigation_drawer_close">close</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

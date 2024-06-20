@@ -22,6 +22,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.egadwys.gi_employee.R
 import com.egadwys.gi_employee.dashboard.viewpager.ViewPagerAdapter
 import com.egadwys.gi_employee.payroll.detail.Detail
+import com.egadwys.gi_employee.splash.SplashScreen
 import com.google.android.material.navigation.NavigationView
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 

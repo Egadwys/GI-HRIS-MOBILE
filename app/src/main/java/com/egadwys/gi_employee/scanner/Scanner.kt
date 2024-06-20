@@ -37,6 +37,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
 import com.egadwys.gi_employee.dashboard.Dashboard
+import com.egadwys.gi_employee.splash.SplashScreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -211,7 +212,7 @@ class Scanner : AppCompatActivity() {
                             sendNotification(this@Scanner, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
-                            val intent = Intent(this@Scanner, Dashboard::class.java).apply {
+                            val intent = Intent(this@Scanner, SplashScreen::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)
                             }
