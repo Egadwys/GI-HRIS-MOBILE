@@ -116,6 +116,7 @@ class Auth : AppCompatActivity() {
                     response.body()?.let { loginDataList ->
                         if (loginDataList.isNotEmpty()) {
                             val loginData = loginDataList[0]
+                            Toast.makeText(this@Auth, loginData.staffStatus,Toast.LENGTH_SHORT).show()
                             createNotificationChannel(this@Auth, loginData.name)
                             sendNotification(this@Auth, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()

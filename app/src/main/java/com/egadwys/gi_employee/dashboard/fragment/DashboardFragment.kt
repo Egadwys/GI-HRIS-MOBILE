@@ -10,16 +10,19 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.cuti.Cuti
 import com.egadwys.gi_employee.payroll.Payroll
 import com.egadwys.gi_employee.spl.Spl
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private lateinit var rekapspl: LinearLayout
     private lateinit var payroll: LinearLayout
+    private lateinit var rekapcuti: LinearLayout
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rekapspl = view.findViewById(R.id.rekapspl)
         payroll = view.findViewById(R.id.payroll)
+        rekapcuti = view.findViewById(R.id.rekapcuti)
 
         rekapspl.setOnClickListener {
             vibrate()
@@ -30,6 +33,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         payroll.setOnClickListener {
             vibrate()
             val intent = Intent(requireContext(), Payroll::class.java)
+            startActivity(intent)
+        }
+
+        rekapcuti.setOnClickListener {
+            vibrate()
+            val intent = Intent(requireContext(), Cuti::class.java)
             startActivity(intent)
         }
     }

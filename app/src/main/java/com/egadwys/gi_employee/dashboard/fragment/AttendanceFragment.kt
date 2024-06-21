@@ -53,7 +53,7 @@ class AttendanceFragment : Fragment(), DataAdapter_attendance.OnItemClickListene
 
         val nik = sharedPreferences.getString("user", "NoUser")
         Log.d("Filter", "NIK: ${nik}")
-        swipeRefreshLayout.setDistanceToTriggerSync(1000)
+        swipeRefreshLayout.setDistanceToTriggerSync(800)
         swipeRefreshLayout.setOnRefreshListener {
             loaddata(nik.toString())
         }

@@ -1,9 +1,7 @@
-package com.egadwys.gi_employee.payroll
+package com.egadwys.gi_employee.cuti
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +9,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -22,27 +19,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
-import com.egadwys.gi_employee.attendance.DataAdapter_attendance
-import com.egadwys.gi_employee.attendance.DataClass_attendance
-import com.egadwys.gi_employee.attendance.RetrofitClient_attendance
-import com.egadwys.gi_employee.payroll.DataAdapter_payroll
-import com.egadwys.gi_employee.payroll.DataClass_payroll
-import com.egadwys.gi_employee.payroll.RetrofitClient_payroll
-import com.egadwys.gi_employee.payroll.detail.Detail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Payroll : AppCompatActivity(), DataAdapter_payroll.OnItemClickListener {
+class Cuti : AppCompatActivity() {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var loading: LinearLayout
     private lateinit var loadtext: TextView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var sharedPreferences: SharedPreferences
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.payroll)
+        setContentView(R.layout.spl)
 
         sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
         loading = findViewById(R.id.loading)
@@ -74,17 +63,15 @@ class Payroll : AppCompatActivity(), DataAdapter_payroll.OnItemClickListener {
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
 
-        RetrofitClient_payroll.instance.getData(nik).enqueue(object : Callback<List<DataClass_payroll>> {
+        RetrofitClient_cuti.instance.getData(nik).enqueue(object : Callback<List<DataClass_cuti>> {
             @SuppressLint("SetTextI18n")
-            override fun onResponse(call: Call<List<DataClass_payroll>>, response: Response<List<DataClass_payroll>>) {
-                Log.d("Error: ", response.message())
+            override fun onResponse(call: Call<List<DataClass_cuti>>, response: Response<List<DataClass_cuti>>) {
                 if (response.isSuccessful) {
-                    Log.d("Sukses: ", "${response.body()}")
                     val data = response.body()
                     if (!data.isNullOrEmpty()) {
                         runOnUiThread {
-                            mRecyclerView.layoutManager = GridLayoutManager(this@Payroll, 3)
-                            val adapter = DataAdapter_payroll(data, this@Payroll)
+                            mRecyclerView.layoutManager = GridLayoutManager(this@Cuti, 2)
+                            val adapter = DataAdapter_cuti(data, this@Cuti)
                             mRecyclerView.adapter = adapter
 
                             val searchView: SearchView = findViewById(R.id.searchView)
@@ -102,34 +89,30 @@ class Payroll : AppCompatActivity(), DataAdapter_payroll.OnItemClickListener {
                         mRecyclerView.visibility = View.VISIBLE
                         loading.visibility = View.GONE
                     } else {
-                        Toast.makeText(this@Payroll, "Response body is null or empty", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@Cuti, "Response body is null or empty", Toast.LENGTH_LONG).show()
                     }
                     swipeRefreshLayout.isRefreshing = false
                 } else {
                     mRecyclerView.visibility = View.GONE
                     loading.visibility = View.VISIBLE
                     loadtext.text = "Failed to get data: ${response.message()}"
-                    Toast.makeText(this@Payroll, "Failed to get data: ${response.message()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@Cuti, "Failed to get data: ${response.message()}", Toast.LENGTH_LONG).show()
                     swipeRefreshLayout.isRefreshing = false
-                    Log.d("Gagal: ", response.message())
+                    Log.d("Filter", "Publishing results for constraint: ${response.message()}")
                 }
             }
 
             @SuppressLint("SetTextI18n")
-            override fun onFailure(call: Call<List<DataClass_payroll>>, t: Throwable) {
+            override fun onFailure(call: Call<List<DataClass_cuti>>, t: Throwable) {
                 Log.e("Request Failed", t.message.toString())
                 loadtext.text = "Failed to get data: ${t.message.toString()}"
-                Toast.makeText(this@Payroll, "Request failed: ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@Cuti, "Request failed: ${t.message}", Toast.LENGTH_LONG).show()
                 swipeRefreshLayout.isRefreshing = false
             }
         })
     }
 
-    override fun onItemClick(data: DataClass_payroll) {
+    fun onItemClick(data: DataClass_cuti) {
         vibrate()
-        val intent = Intent(this, Detail::class.java).apply {
-            putExtra("id", data.id)
-        }
-        startActivity(intent)
     }
 }

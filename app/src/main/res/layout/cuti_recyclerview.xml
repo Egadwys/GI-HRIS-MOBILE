@@ -1,0 +1,119 @@
+<!-- item_your_data.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="15dp"
+    style="@style/customcard"
+    android:id="@+id/cardspl"
+    android:orientation="vertical"
+    android:layout_margin="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/cuti_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/idcuti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                style="@style/customstyle"
+                android:text="@string/idl"
+                android:hint="@string/idl"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cuti_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cuti_top"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/remarkcuti"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/customstyle"
+                android:text="@string/remark"
+                android:hint="@string/remark"
+                android:textSize="13sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:layout_below="@id/cuti_middle"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                android:id="@+id/cardstatusstart"
+                app:cardBackgroundColor="#4CAF50">
+
+                <TextView
+                    android:id="@+id/startcuti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/customstyle"
+                    android:gravity="center"
+                    android:text="@string/start"
+                    android:hint="@string/start"
+                    android:textSize="13sp"
+                    android:textColor="@color/white3"
+                    android:textStyle="bold|italic" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                android:id="@+id/cardstatusend"
+                app:cardBackgroundColor="#FF5722">
+
+                <TextView
+                    android:id="@+id/endcuti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/customstyle"
+                    android:gravity="center"
+                    android:text="@string/end"
+                    android:hint="@string/end"
+                    android:textSize="13sp"
+                    android:textColor="@color/white3"
+                    android:textStyle="bold|italic" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -6,13 +6,9 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        style="@style/customstyle"
-        android:text="@string/navigation_drawer"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
+        android:id="@+id/content_frame"/>
 
 </LinearLayout>

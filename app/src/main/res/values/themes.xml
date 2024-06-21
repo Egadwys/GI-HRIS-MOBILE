@@ -79,6 +79,10 @@
         <item name="android:indeterminateTint">@color/black3</item>
     </style>
 
+    <style name="customstyleprofilpic">
+        <item name="background">@drawable/profile_picture_border</item>
+    </style>
+
     <style name="Theme.GIEMPLOYEE.Fullscreen" parent="Theme.GIEMPLOYEE">
         <item name="android:actionBarStyle">@style/Widget.Theme.GIEMPLOYEE.ActionBar.Fullscreen
         </item>

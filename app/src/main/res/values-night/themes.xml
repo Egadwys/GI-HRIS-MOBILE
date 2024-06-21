@@ -71,6 +71,10 @@
         <item name="cardBackgroundColor">@color/black3</item>
     </style>
 
+    <style name="customstyleprofilpic">
+        <item name="background">@drawable/profile_picture_border</item>
+    </style>
+
     <style name="logo_hris">
         <item name="android:src">@drawable/hris_white</item>
     </style>

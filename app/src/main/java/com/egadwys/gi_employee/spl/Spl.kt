@@ -10,6 +10,7 @@ import android.os.Vibrator
 import android.util.Log
 import android.view.View
 import android.view.ViewConfiguration
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
 import com.egadwys.gi_employee.custom.CustomSwipeRefreshLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,9 +33,13 @@ class Spl : AppCompatActivity() {
     private lateinit var loadtext: TextView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var scroll_up: FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.spl)
+
+        scroll_up = findViewById(R.id.scroll_up)
+        scroll_up.visibility = View.GONE
 
         sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
         loading = findViewById(R.id.loading)
@@ -41,9 +47,38 @@ class Spl : AppCompatActivity() {
         mRecyclerView = findViewById(R.id.recyclerView)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
+        scroll_up.setOnClickListener {
+            mRecyclerView.scrollToPosition(0)
+        }
+
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when (newState) {
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        // The RecyclerView is not scrolling
+                        val fadeInAnimation = AnimationUtils.loadAnimation(this@Spl, R.anim.fade_in)
+                        scroll_up.startAnimation(fadeInAnimation)
+                        scroll_up.visibility = View.VISIBLE
+                    }
+
+                    RecyclerView.SCROLL_STATE_DRAGGING -> {
+                        // The RecyclerView is currently being dragged by outside input such as user touch input
+                        val fadeInAnimation = AnimationUtils.loadAnimation(this@Spl, R.anim.fade_out)
+                        scroll_up.startAnimation(fadeInAnimation)
+                        scroll_up.visibility = View.GONE
+                    }
+
+                    RecyclerView.SCROLL_STATE_SETTLING -> {
+                        // The RecyclerView is currently animating to a final position while not under outside control
+                    }
+                }
+            }
+        })
+
         val nik = sharedPreferences.getString("user", "NoUser")
         Log.d("Filter", "NIK: ${nik}")
-        swipeRefreshLayout.setDistanceToTriggerSync(1000)
+        swipeRefreshLayout.setDistanceToTriggerSync(800)
         swipeRefreshLayout.setOnRefreshListener {
             loaddata(nik.toString())
         }

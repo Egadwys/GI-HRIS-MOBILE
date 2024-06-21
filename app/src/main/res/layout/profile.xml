@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/loading">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/cover_photo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cover"
+                android:background="@drawable/round_black3"
+                android:clipToOutline="true"/>
+
+            <LinearLayout
+                android:id="@+id/lay_profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cover_photo"
+                android:layout_marginTop="-35dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/profile_picture_border"
+                android:backgroundTint="@color/white3"
+                android:padding="2dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/cover"
+                    android:background="@drawable/profile_picture_border"
+                    android:scaleType="centerCrop"
+                    android:clipToOutline="true"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lay_profile_picture"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/name"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                style="@style/customstyle" />
+
+            <TextView
+                android:id="@+id/profile_subname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_name"
+                android:layout_centerHorizontal="true"
+                android:text="@string/name"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                style="@style/customstyle"/>
+
+            <LinearLayout
+                android:id="@+id/timeline_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/customstyle"
+                android:layout_below="@id/profile_subname"
+                android:layout_marginTop="10dp"
+                android:padding="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profile_title_dept"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/departemen"
+                            android:textSize="13sp"
+                            android:textStyle="bold|italic"
+                            style="@style/customstyle" />
+
+                        <TextView
+                            android:id="@+id/profile_dept"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/departemen"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            style="@style/customstyle" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profile_title_div"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/divisi"
+                            android:textSize="13sp"
+                            android:textStyle="bold|italic"
+                            style="@style/customstyle" />
+
+                        <TextView
+                            android:id="@+id/profile_div"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/divisi"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            style="@style/customstyle" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profile_title_workgroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/workgroup"
+                            android:textSize="13sp"
+                            android:textStyle="bold|italic"
+                            style="@style/customstyle" />
+
+                        <TextView
+                            android:id="@+id/profile_workgroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/workgroup"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            style="@style/customstyle" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profile_title_workStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/workstatus"
+                            android:textSize="13sp"
+                            android:textStyle="bold|italic"
+                            style="@style/customstyle" />
+
+                        <TextView
+                            android:id="@+id/profile_workStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/workstatus"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            style="@style/customstyle" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profile_title_startc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/start_contract"
+                            android:textSize="13sp"
+                            android:textStyle="bold|italic"
+                            style="@style/customstyle" />
+
+                        <TextView
+                            android:id="@+id/profile_startc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/start_contract"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            style="@style/customstyle" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profile_title_endc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/end_contract"
+                            android:textSize="13sp"
+                            android:textStyle="bold|italic"
+                            style="@style/customstyle" />
+
+                        <TextView
+                            android:id="@+id/profile_endc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/end_contract"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            style="@style/customstyle" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
