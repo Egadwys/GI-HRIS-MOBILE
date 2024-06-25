@@ -70,7 +70,7 @@
     <string name="date">21-01-1999</string>
     <string name="start">12:00:00</string>
     <string name="end">15:00:00</string>
-    <string name="status">status</string>
+    <string name="status">Status</string>
     <string name="remark">remark</string>
     <string name="lembur">Lembur</string>
     <string name="profile">Profile</string>
@@ -89,4 +89,9 @@
     <string name="workstatus">Work status</string>
     <string name="start_contract">Start contract</string>
     <string name="end_contract">End contract</string>
+    <string name="work_status">Work status</string>
+    <string name="jenis_kelamin">Jenis kelamin</string>
+    <string name="address">Address</string>
+    <string name="tanggal_lahir">Tanggal lahir</string>
+    <string name="employee_status">Employee status</string>
 </resources>

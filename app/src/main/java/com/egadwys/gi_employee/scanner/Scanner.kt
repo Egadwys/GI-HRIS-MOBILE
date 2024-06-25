@@ -208,7 +208,6 @@ class Scanner : AppCompatActivity() {
                     response.body()?.let { loginDataList ->
                         if (loginDataList.isNotEmpty()) {
                             val loginData = loginDataList[0]
-                            Toast.makeText(this@Scanner, loginData.staffStatus,Toast.LENGTH_SHORT).show()
                             createNotificationChannel(this@Scanner, loginData.name)
                             sendNotification(this@Scanner, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()

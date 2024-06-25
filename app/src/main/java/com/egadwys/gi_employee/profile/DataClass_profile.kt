@@ -13,6 +13,7 @@ data class DataClass_profile(
     val negara: String,
     val phoneNumber: String,
     val ktp: String,
+    val dateBirth: String,
     val bpjsKS: String,
     val bpjsTK: String,
     val bankName: String,

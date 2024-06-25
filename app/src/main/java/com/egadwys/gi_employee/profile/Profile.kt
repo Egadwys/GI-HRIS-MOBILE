@@ -37,8 +37,11 @@ class Profile : Fragment() {
     private lateinit var div: TextView
     private lateinit var wg: TextView
     private lateinit var ws: TextView
-    private lateinit var sc: TextView
-    private lateinit var ec: TextView
+    private lateinit var ss: TextView
+    private lateinit var db: TextView
+    private lateinit var jk: TextView
+    private lateinit var s: TextView
+    private lateinit var a: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +56,11 @@ class Profile : Fragment() {
         div = view.findViewById(R.id.profile_div)
         wg = view.findViewById(R.id.profile_workgroup)
         ws = view.findViewById(R.id.profile_workStatus)
-        sc = view.findViewById(R.id.profile_startc)
-        ec = view.findViewById(R.id.profile_endc)
+        ss = view.findViewById(R.id.profile_staffStatus)
+        db = view.findViewById(R.id.profile_dateBirth)
+        jk = view.findViewById(R.id.profile_jenis)
+        s = view.findViewById(R.id.profile_menikah)
+        a = view.findViewById(R.id.profile_address)
 
         sharedPreferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
 
@@ -95,8 +101,11 @@ class Profile : Fragment() {
                             div.text = loginData.division
                             wg.text = loginData.workgroup
                             ws.text = loginData.workStatus
-                            sc.text = loginData.startContract
-                            ec.text = loginData.endContract
+                            ss.text = loginData.EmpStatus
+                            db.text = loginData.dateBirth
+                            jk.text = loginData.jenis
+                            s.text = loginData.status
+                            a.text = loginData.address
                         }
                     }
                 } else {
