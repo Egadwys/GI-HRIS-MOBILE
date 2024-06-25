@@ -12,18 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.egadwys.gi_employee.R
-import com.egadwys.gi_employee.attendance.DataAdapter_attendance
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -88,7 +83,7 @@ class Profile : Fragment() {
     }
 
     private fun loaddata(nik: String) {
-        RetrofitClient_profile.instance.getData(nik).enqueue(object : Callback<List<DataClass_profile>> {
+        RetrofitClient.instance.GetDetailUser(nik).enqueue(object : Callback<List<DataClass_profile>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<DataClass_profile>>, response: Response<List<DataClass_profile>>) {
                 if (response.isSuccessful) {

@@ -24,9 +24,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import com.egadwys.gi_employee.attendance.DataAdapter_attendance
 import com.egadwys.gi_employee.attendance.DataClass_attendance
-import com.egadwys.gi_employee.attendance.RetrofitClient_attendance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,7 +77,7 @@ class AttendanceFragment : Fragment(), DataAdapter_attendance.OnItemClickListene
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
 
-        RetrofitClient_attendance.instance.getData(nik).enqueue(object : Callback<List<DataClass_attendance>> {
+        RetrofitClient.instance.GetAttendanceUser(nik).enqueue(object : Callback<List<DataClass_attendance>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<DataClass_attendance>>, response: Response<List<DataClass_attendance>>) {
                 if (response.isSuccessful) {

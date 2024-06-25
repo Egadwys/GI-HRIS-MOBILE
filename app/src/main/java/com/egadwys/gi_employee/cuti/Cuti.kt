@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,7 +64,7 @@ class Cuti : AppCompatActivity() {
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
 
-        RetrofitClient_cuti.instance.getData(nik).enqueue(object : Callback<List<DataClass_cuti>> {
+        RetrofitClient.instance.GetDetailCuti(nik).enqueue(object : Callback<List<DataClass_cuti>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<DataClass_cuti>>, response: Response<List<DataClass_cuti>>) {
                 if (response.isSuccessful) {

@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,7 +80,7 @@ class Detail : AppCompatActivity() {
     }
 
     private fun getdata(id: String) {
-        RetrofitClient_detail.instance.cekpayroll(id).enqueue(object :
+        RetrofitClient.instance.GetDetailPayroll(id).enqueue(object :
             Callback<List<DataClass_detail>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<DataClass_detail>>, response: Response<List<DataClass_detail>>) {

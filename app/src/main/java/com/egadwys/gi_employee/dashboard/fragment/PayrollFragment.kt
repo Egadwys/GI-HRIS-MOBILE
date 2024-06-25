@@ -22,9 +22,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import com.egadwys.gi_employee.payroll.DataAdapter_payroll
 import com.egadwys.gi_employee.payroll.DataClass_payroll
-import com.egadwys.gi_employee.payroll.RetrofitClient_payroll
 import com.egadwys.gi_employee.payroll.detail.Detail
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,7 +75,7 @@ class PayrollFragment : Fragment(), DataAdapter_payroll.OnItemClickListener {
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
         Log.d("NIK: ", nik)
-        RetrofitClient_payroll.instance.getData(nik).enqueue(object : Callback<List<DataClass_payroll>> {
+        RetrofitClient.instance.GetPayroll(nik).enqueue(object : Callback<List<DataClass_payroll>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<DataClass_payroll>>, response: Response<List<DataClass_payroll>>) {
                 Log.d("Error: ", response.message())

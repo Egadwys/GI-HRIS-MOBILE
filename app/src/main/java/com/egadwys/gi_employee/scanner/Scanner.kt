@@ -36,7 +36,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
-import com.egadwys.gi_employee.dashboard.Dashboard
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import com.egadwys.gi_employee.splash.SplashScreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.common.util.concurrent.ListenableFuture
@@ -201,7 +201,7 @@ class Scanner : AppCompatActivity() {
 
     private fun getdata(user: String) {
         val fadeInAnimationout = AnimationUtils.loadAnimation(this, R.anim.fade_out)
-        RetrofitClient_scanner.instance.cekuser(user).enqueue(object :
+        RetrofitClient.instance.AuthUserScanner(user).enqueue(object :
             Callback<List<DataClass_scanner>> {
             override fun onResponse(call: Call<List<DataClass_scanner>>, response: Response<List<DataClass_scanner>>) {
                 if (response.isSuccessful) {

@@ -9,7 +9,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.View
-import android.view.ViewConfiguration
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -21,7 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
-import com.egadwys.gi_employee.custom.CustomSwipeRefreshLayout
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
@@ -100,7 +99,7 @@ class Spl : AppCompatActivity() {
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
 
-        RetrofitClient_spl.instance.getData(nik).enqueue(object : Callback<List<DataClass_spl>> {
+        RetrofitClient.instance.GetDetailSPL(nik).enqueue(object : Callback<List<DataClass_spl>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<DataClass_spl>>, response: Response<List<DataClass_spl>>) {
                 if (response.isSuccessful) {

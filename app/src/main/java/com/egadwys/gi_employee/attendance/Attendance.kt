@@ -1,9 +1,7 @@
 package com.egadwys.gi_employee.dashboard.activity
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +9,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -22,9 +19,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import com.egadwys.gi_employee.attendance.DataAdapter_attendance
 import com.egadwys.gi_employee.attendance.DataClass_attendance
-import com.egadwys.gi_employee.attendance.RetrofitClient_attendance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,7 +67,7 @@ class AttendanceActivity : AppCompatActivity(), DataAdapter_attendance.OnItemCli
         mRecyclerView.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = true
 
-        RetrofitClient_attendance.instance.getData(nik).enqueue(object : Callback<List<DataClass_attendance>> {
+        RetrofitClient.instance.GetAttendanceUser(nik).enqueue(object : Callback<List<DataClass_attendance>> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<DataClass_attendance>>, response: Response<List<DataClass_attendance>>) {
                 if (response.isSuccessful) {

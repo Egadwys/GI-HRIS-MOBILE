@@ -25,6 +25,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
+import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import com.egadwys.gi_employee.dashboard.Dashboard
 import com.egadwys.gi_employee.scanner.Scanner
 import com.egadwys.gi_employee.splash.SplashScreen
@@ -109,7 +110,7 @@ class Auth : AppCompatActivity() {
 
     private fun getdata(user: String, pass: String) {
         val fadeInAnimationout = AnimationUtils.loadAnimation(this, R.anim.fade_out)
-        RetrofitClient_auth.instance.cekuser(user,pass).enqueue(object : Callback<List<DataClass_auth>> {
+        RetrofitClient.instance.AuthUser(user,pass).enqueue(object : Callback<List<DataClass_auth>> {
             override fun onResponse(call: Call<List<DataClass_auth>>, response: Response<List<DataClass_auth>>) {
                 vibratex()
                 if (response.isSuccessful) {
