@@ -95,14 +95,17 @@ class Payroll : AppCompatActivity(), DataAdapter_payroll.OnItemClickListener {
                         mRecyclerView.visibility = View.VISIBLE
                         loading.visibility = View.GONE
                     } else {
-                        Toast.makeText(this@Payroll, "Response body is null or empty", Toast.LENGTH_LONG).show()
+                        Log.d("Null", "onResponse: ${response.body()}")
                     }
                     swipeRefreshLayout.isRefreshing = false
                 } else {
                     mRecyclerView.visibility = View.GONE
                     loading.visibility = View.VISIBLE
-                    loadtext.text = "Failed to get data: ${response.message()}"
-                    Toast.makeText(this@Payroll, "Failed to get data: ${response.message()}", Toast.LENGTH_LONG).show()
+                    if (response.message().toString() == "Not Found"){
+                        loadtext.text = "Tidak ada data Payroll"
+                    } else {
+                        loadtext.text = "Failed to get data: ${response.message()}"
+                    }
                     swipeRefreshLayout.isRefreshing = false
                     Log.d("Gagal: ", response.message())
                 }

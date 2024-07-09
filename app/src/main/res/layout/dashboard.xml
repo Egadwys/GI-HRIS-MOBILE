@@ -17,31 +17,62 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
             style="@style/customstyleheader">
 
-            <TextView
-                android:id="@+id/dashboard_header"
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/profile"
+                android:src="@drawable/cover"
+                android:background="@drawable/profile_picture_border"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true"
+                tools:ignore="UnusedAttribute" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:maxLength="25"
-                style="@style/customstyle"
-                android:text="@string/greeting"
-                android:textStyle="bold|italic"
-                android:textSize="18sp"/>
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/profile_picture"
+                android:orientation="vertical"
+                tools:ignore="RelativeOverlap">
+
+                <TextView
+                    android:id="@+id/dashboard_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="25"
+                    style="@style/customstyle"
+                    android:text="@string/greeting"
+                    android:textStyle="bold|italic"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/dashboard_subheader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/customstyle"
+                    android:text="@string/nik"
+                    android:textStyle="bold|italic"
+                    android:textSize="13sp"/>
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/dashboard_logout"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:contentDescription="@string/profile"
                 android:paddingVertical="3dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_sign_out"
                 style="@style/custompic" />
-
 
         </RelativeLayout>
 

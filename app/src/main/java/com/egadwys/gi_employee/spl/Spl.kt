@@ -125,14 +125,17 @@ class Spl : AppCompatActivity() {
                         mRecyclerView.visibility = View.VISIBLE
                         loading.visibility = View.GONE
                     } else {
-                        Toast.makeText(this@Spl, "Response body is null or empty", Toast.LENGTH_LONG).show()
+                        Log.d("Null", "onResponse: ${response.body()}")
                     }
                     swipeRefreshLayout.isRefreshing = false
                 } else {
                     mRecyclerView.visibility = View.GONE
                     loading.visibility = View.VISIBLE
-                    loadtext.text = "Failed to get data: ${response.message()}"
-                    Toast.makeText(this@Spl, "Failed to get data: ${response.message()}", Toast.LENGTH_LONG).show()
+                    if (response.message().toString() == "Not Found"){
+                        loadtext.text = "Tidak ada data SPL"
+                    } else {
+                        loadtext.text = "Failed to get data: ${response.message()}"
+                    }
                     swipeRefreshLayout.isRefreshing = false
                     Log.d("Filter", "Publishing results for constraint: ${response.message()}")
                 }

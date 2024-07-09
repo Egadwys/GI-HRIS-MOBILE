@@ -212,12 +212,13 @@ class Scanner : AppCompatActivity() {
                             sendNotification(this@Scanner, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
+                            sharedPreferences.edit().putString("staff", loginData.staffStatus).apply()
                             val intent = Intent(this@Scanner, SplashScreen::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)
                             }
-                            startActivity(intent)
                             finish()
+                            startActivity(intent)
                         }
                     }
                     Log.d("resonse: ", response.message())

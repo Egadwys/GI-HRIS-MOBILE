@@ -3,7 +3,10 @@ package com.egadwys.gi_employee.dashboard
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -11,16 +14,20 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.egadwys.gi_employee.R
 import com.egadwys.gi_employee.dashboard.viewpager.ViewPagerAdapter
 import com.egadwys.gi_employee.profile.Profile
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 class Dashboard : AppCompatActivity() {
@@ -29,9 +36,11 @@ class Dashboard : AppCompatActivity() {
     private lateinit var menu:ChipNavigationBar
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var dashboard_header: TextView
+    private lateinit var dashboard_subheader: TextView
     private lateinit var dashboard_logout: ImageView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
+    private lateinit var profil_picture: ImageView
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +66,25 @@ class Dashboard : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         dashboard_header = findViewById(R.id.dashboard_header)
+        dashboard_subheader = findViewById(R.id.dashboard_subheader)
         dashboard_logout = findViewById(R.id.dashboard_logout)
+        profil_picture= findViewById(R.id.profile_picture)
 
         sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
         val nama = sharedPreferences.getString("nama", "NoNama")
         val nik = sharedPreferences.getString("user", "NoUser")
 
+        val imageUrl = "http://192.168.10.242:8078/GI-HRIS-API/photo/${nik}.jpg"
+        Glide.with(this)
+            .load(imageUrl)
+            .into(profil_picture)
+
+        profil_picture.setOnClickListener {
+            menu.setItemSelected(R.id.menu_profile, true)
+        }
+
         dashboard_header.text = nama
+        dashboard_subheader.text = nik
 
         viewPager = findViewById(R.id.viewPager)
         menu = findViewById(R.id.chip)
@@ -78,13 +99,16 @@ class Dashboard : AppCompatActivity() {
                 R.id.menu_dashboard -> {
                     viewPager.currentItem = 0
                     cnb = 0
+                    vibrate()
                 }
                 R.id.menu_attendance -> {
                     viewPager.currentItem = 1
                     cnb = 1
+                    vibrate()
                 }
                 R.id.menu_profile -> {
                     drawerLayout.openDrawer(GravityCompat.START)
+                    vibrate()
                 }
             }
         }
@@ -119,25 +143,30 @@ class Dashboard : AppCompatActivity() {
                     0 -> {
                         cnb = 0
                         menu.setItemSelected(R.id.menu_dashboard, true)
+                        vibrate()
                     }
                     1 -> {
                         cnb = 1
                         menu.setItemSelected(R.id.menu_attendance, true)
+                        vibrate()
                     }
                 }
             }
         })
 
         dashboard_logout.setOnClickListener {
+            vibrate()
             val builder = AlertDialog.Builder(this)
             builder.setTitle("LOG OUT")
             builder.setPositiveButton("Logout") { dialog, which ->
+                vibrate()
                 sharedPreferences.edit().putString("user", "NoUser").apply()
                 sharedPreferences.edit().putString("nama", "NoNama").apply()
                 finish()
                 Toast.makeText(this, "You're logging off", Toast.LENGTH_SHORT).show()
             }
             builder.setNegativeButton("Cancel") { dialog, which ->
+                vibrate()
                 return@setNegativeButton
             }
             val dialog = builder.create()
@@ -157,6 +186,18 @@ class Dashboard : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun vibrate() {
+        val vibrator = ContextCompat.getSystemService(this@Dashboard, Vibrator::class.java) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Vibrate for 100 milliseconds
+            val vibrationEffect = VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            // Deprecated in API 26
+            vibrator.vibrate(100)
+        }
     }
 
     private fun shouldHandleBackPress(): Boolean {

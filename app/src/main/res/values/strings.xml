@@ -94,4 +94,7 @@
     <string name="address">Address</string>
     <string name="tanggal_lahir">Tanggal lahir</string>
     <string name="employee_status">Employee status</string>
+    <string name="switch_mode">Switch mode</string>
+    <string name="hello">Hello</string>
+    <string name="credit">if you see this, then you are one of the lucky ones to have found this hidden page. thanks for using this app, if you are the one who continues this project, keep up the good work, you can do it!</string>
 </resources>

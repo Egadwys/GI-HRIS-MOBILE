@@ -1,6 +1,7 @@
 package com.egadwys.gi_employee.auth
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -14,6 +15,7 @@ import android.os.Vibrator
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -27,6 +29,7 @@ import androidx.core.content.ContextCompat
 import com.egadwys.gi_employee.R
 import com.egadwys.gi_employee.apiContainer.RetrofitClient
 import com.egadwys.gi_employee.dashboard.Dashboard
+import com.egadwys.gi_employee.dummy.Credit
 import com.egadwys.gi_employee.scanner.Scanner
 import com.egadwys.gi_employee.splash.SplashScreen
 import com.google.android.material.button.MaterialButton
@@ -43,10 +46,36 @@ class Auth : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var loading_auth: LinearLayout
     private lateinit var scan: ImageView
+    private lateinit var animationView: ImageView
 
+    private var touchCount = 0
+    private val handler = Handler(Looper.getMainLooper())
+    private val resetTouchCountRunnable = Runnable {
+        touchCount = 0
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.auth2)
+        setContentView(R.layout.auth)
+
+        animationView = findViewById(R.id.animationView)
+        animationView.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                vibrate()
+                touchCount++
+                Log.d("touchCount", "onCreate: ${touchCount}")
+                handler.removeCallbacks(resetTouchCountRunnable)
+                handler.postDelayed(resetTouchCountRunnable, 500)
+                if (touchCount >= 10) {
+                    val intent = Intent(this@Auth, Credit::class.java)
+                    startActivity(intent)
+                    touchCount = 0 // Reset count after showing toast
+                    handler.removeCallbacks(resetTouchCountRunnable)
+                }
+            }
+            true
+        }
 
         scan = findViewById(R.id.testscanner)
         scan.setOnClickListener {
@@ -121,10 +150,12 @@ class Auth : AppCompatActivity() {
                             sendNotification(this@Auth, loginData.name)
                             sharedPreferences.edit().putString("user", loginData.username).apply()
                             sharedPreferences.edit().putString("nama", loginData.name).apply()
+                            sharedPreferences.edit().putString("staff", loginData.staffStatus).apply()
                             val intent = Intent(this@Auth, SplashScreen::class.java).apply {
                                 putExtra("username", loginData.username)
                                 putExtra("name", loginData.name)
                             }
+                            finish()
                             startActivity(intent)
                         }
                     }
